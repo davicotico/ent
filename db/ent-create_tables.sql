@@ -1,5 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS ent;
 
+CREATE TABLE ent.application (
+    id SERIAL  NOT NULL,
+    code CHARACTER VARYING(20)  NOT NULL,
+    name CHARACTER VARYING(250),
+    description TEXT,
+    url CHARACTER VARYING(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    last_user CHARACTER VARYING(50),
+    CONSTRAINT PK_application PRIMARY KEY (id)
+);
+
 -- roles
 CREATE TABLE ent.role (
     id SERIAL  NOT NULL,
@@ -14,7 +26,7 @@ CREATE TABLE ent.role (
 );
 
 ALTER TABLE ent.role ADD CONSTRAINT application_role 
-    FOREIGN KEY (application_id) REFERENCES core.application (id);
+    FOREIGN KEY (application_id) REFERENCES ent.application (id);
 ALTER TABLE ent.role ADD CONSTRAINT role_role 
     FOREIGN KEY (parent_id) REFERENCES ent.role (id);
 	
@@ -35,7 +47,7 @@ CREATE TABLE ent.permission (
 ALTER TABLE ent.permission ADD CONSTRAINT permission_permission 
     FOREIGN KEY (parent_id) REFERENCES ent.permission (id);
 ALTER TABLE ent.permission ADD CONSTRAINT application_permission 
-    FOREIGN KEY (application_id) REFERENCES core.application (id);
+    FOREIGN KEY (application_id) REFERENCES ent.application (id);
 	
 -- roles-permissions
 CREATE TABLE ent.role_permission (
