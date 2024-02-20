@@ -1,7 +1,6 @@
 package com.davidticona.ent.service;
 
 import com.davidticona.ent.domain.entity.Role;
-import com.davidticona.ent.domain.entity.User;
 import java.util.List;
 
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  */
 public interface RoleService {
     void create(Role role);
-    List<User> read();
+    List<Role> read();
     void update(Integer id, Role role);
     void delete(Integer id);
     

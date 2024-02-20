@@ -12,6 +12,20 @@ CREATE TABLE ent.application (
     CONSTRAINT PK_application PRIMARY KEY (id)
 );
 
+CREATE TABLE ent.user (
+    id SERIAL  NOT NULL,
+    username CHARACTER VARYING(50),
+    password_salt CHARACTER VARYING(255),
+    password_hash CHARACTER VARYING(255),
+    email CHARACTER VARYING(250),
+    email_confirmed BOOLEAN,
+    active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    last_user CHARACTER VARYING(50),
+    CONSTRAINT PK_user PRIMARY KEY (id)
+);
+
 -- roles
 CREATE TABLE ent.role (
     id SERIAL  NOT NULL,
