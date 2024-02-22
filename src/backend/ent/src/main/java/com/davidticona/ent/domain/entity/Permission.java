@@ -21,8 +21,12 @@ public class Permission {
     Integer id;
     
     @Column
+    Integer parentId;
+    
+    @Column
     String code;
     
     @Column
     String name;
+    
 }

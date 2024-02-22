@@ -32,5 +32,8 @@ public class User {
     @Column
     String email;
     
+    @Column
+    Boolean isValidEmail;
+    
     
 }

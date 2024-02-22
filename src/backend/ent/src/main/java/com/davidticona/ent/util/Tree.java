@@ -18,7 +18,7 @@ public class Tree {
     }
     
     public List<Node> getTree() {
-        return buildTree(this.items, 0);
+        return buildTree(this.items, null);
     }
     
     private List<Node> buildTree(List<AdjacentItem> elements, Integer parentId) {
