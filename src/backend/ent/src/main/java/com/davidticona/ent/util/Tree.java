@@ -21,6 +21,10 @@ public class Tree {
         return buildTree(this.items, null);
     }
     
+    public List<Node> getTree(Integer parentId) {
+        return buildTree(this.items, parentId);
+    }
+    
     private List<Node> buildTree(List<AdjacentItem> elements, Integer parentId) {
         List<Node> output = new LinkedList<>();
         for (AdjacentItem item : groupByParentId(parentId)) {

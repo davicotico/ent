@@ -42,6 +42,23 @@ INSERT INTO ent."permission" (application_id, parent_id, code, "name", created_a
 
 -- roles - permissions
 INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(1, 1, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(2, 2, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(2, 3, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(2, 4, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(3, 9, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(3, 10, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(4, 2, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(4, 10, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(5, 3, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(5, 11, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(6, 2, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(8, 6, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(9, 12, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(9, 11, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(10, 11, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(11, 3, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+INSERT INTO ent.role_permission (id_role, id_permission, created_at, updated_at, last_user) VALUES(11, 11, '2024-02-21 22:02:23.154', NULL, 'superadmin');
+
 
 -- users - roles
 INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(1, 1, '2024-02-21 22:04:11.383', NULL, 'superadmin');
