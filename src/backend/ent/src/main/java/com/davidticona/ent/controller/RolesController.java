@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.davidticona.ent.util.mapper.RoleMapper;
-import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -35,16 +39,17 @@ public class RolesController {
     public List<TreeNode> read() {
         return new Tree(mapper.entityToAdjacentItem(roleService.read())).getTree();
     }
-    
+
     @GetMapping("/{id}/permissions")
-    public List<AdjacentItem> getPermissionsByRoleId(@PathVariable("id") Integer roleId) {
-        List<AdjacentPermission> permissions = roleService.getPermissions(roleId, 1);
-        return permissionMaper.toAdjacentItem(permissions);
-    }
-    
-    @GetMapping("/{id}/permissions-tree")
-    public List<TreeNode> test(@PathVariable("id") Integer roleId) {
-        return roleService.getPermissionsAsTree(roleId, 1);
+    public ResponseEntity<?> getPermissionsByRoleId(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @PathVariable("id") Integer roleId,
+            @RequestParam(name = "showTree") Optional<Boolean> showTree) {
+        if (showTree.isPresent() && Objects.equals(showTree.get(), Boolean.TRUE)) {
+            return ResponseEntity.ok(roleService.getPermissionsAsTree(roleId, applicationId));
+        }
+        List<AdjacentPermission> permissions = roleService.getPermissions(roleId, applicationId);
+        return ResponseEntity.ok(permissionMaper.toAdjacentItem(permissions));
     }
 }
 

@@ -7,10 +7,8 @@ import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
     
     @Override
     public void create(Role role) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.repository.save(role);
     }
 
     @Override

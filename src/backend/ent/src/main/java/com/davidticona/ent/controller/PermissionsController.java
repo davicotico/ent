@@ -27,6 +27,5 @@ public class PermissionsController {
     @GetMapping
     public List<TreeNode> read() {
         return new Tree(mapper.toAdjacentItem(permissionService.getAll())).getTree();
-        //return new Tree(mapper.entityToAdjacentItem(permissionService.read())).getTree();
     }
 }
