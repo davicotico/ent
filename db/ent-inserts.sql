@@ -4,9 +4,17 @@ INSERT INTO ent.application (code, "name", description, url, created_at, updated
 
 -- users
 INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('superadmin', '123', '123', 'support@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');
+INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('david', '123', '123', 'david@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');
+INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('zulema', '123', '123', 'financial@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');
+INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('sparrow', '123', '123', 'itsecurity@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');
+INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('scooby', '123', '123', 'network@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');
 
 -- users - applications
 INSERT INTO ent.application_user (application_id, user_id, created_at, updated_at, last_user) VALUES(1, 1, '2024-02-21 21:56:46.213', NULL, 'superadmin');
+INSERT INTO ent.application_user (application_id, user_id, created_at, updated_at, last_user) VALUES(1, 2, '2024-02-21 21:56:46.213', NULL, 'superadmin');
+INSERT INTO ent.application_user (application_id, user_id, created_at, updated_at, last_user) VALUES(1, 3, '2024-02-21 21:56:46.213', NULL, 'superadmin');
+INSERT INTO ent.application_user (application_id, user_id, created_at, updated_at, last_user) VALUES(1, 4, '2024-02-21 21:56:46.213', NULL, 'superadmin');
+INSERT INTO ent.application_user (application_id, user_id, created_at, updated_at, last_user) VALUES(1, 5, '2024-02-21 21:56:46.213', NULL, 'superadmin');
 
 -- roles
 INSERT INTO ent."role" (application_id, parent_id, code, "name", created_at, updated_at, last_user) VALUES(1, NULL, 'root', 'root', '2024-02-21 21:27:23.796', NULL, 'superadmin');
@@ -62,4 +70,10 @@ INSERT INTO ent.role_permission (role_id, permission_id, created_at, updated_at,
 
 -- users - roles
 INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(1, 1, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(2, 2, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(3, 3, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(3, 4, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(4, 10, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(5, 9, '2024-02-21 22:04:11.383', NULL, 'superadmin');
+INSERT INTO ent.user_role (user_id, role_id, created_at, updated_at, last_user) VALUES(5, 11, '2024-02-21 22:04:11.383', NULL, 'superadmin');
 
