@@ -1,6 +1,6 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.dto.Node;
+import com.davidticona.ent.domain.dto.TreeNode;
 import com.davidticona.ent.service.PermissionService;
 import com.davidticona.ent.util.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
@@ -25,7 +25,8 @@ public class PermissionsController {
     private PermissionMapper mapper;
     
     @GetMapping
-    public List<Node> read() {
-        return new Tree(mapper.entityToAdjacentItem(permissionService.read())).getTree();
+    public List<TreeNode> read() {
+        return new Tree(mapper.toAdjacentItem(permissionService.getAll())).getTree();
+        //return new Tree(mapper.entityToAdjacentItem(permissionService.read())).getTree();
     }
 }

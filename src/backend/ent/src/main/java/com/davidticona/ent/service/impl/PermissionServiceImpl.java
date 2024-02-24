@@ -1,7 +1,7 @@
 package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.entity.User;
+import com.davidticona.ent.domain.projection.AdjacentPermission;
 import com.davidticona.ent.domain.repository.PermissionRepository;
 import com.davidticona.ent.service.PermissionService;
 import java.util.List;
@@ -19,12 +19,17 @@ public class PermissionServiceImpl implements PermissionService{
 
     @Override
     public void create(Permission permission) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        repository.save(permission);
     }
 
     @Override
     public List<Permission> read() {
         return repository.findAll();
+    }
+    
+    @Override
+    public List<AdjacentPermission> getAll() {
+        return repository.getAllPermissions();
     }
 
     @Override

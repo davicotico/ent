@@ -10,12 +10,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Node {
+public class TreeNode {
     private Integer id;
     private String code;
     private String name;
-    private List<Node> children;
-    public Node(Integer id, String code, String name) {
+    private List<TreeNode> children;
+    public TreeNode(Integer id, String code, String name) {
         this.id = id;
         this.code = code;
         this.name = name;

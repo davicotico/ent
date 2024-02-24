@@ -1,7 +1,7 @@
 package com.davidticona.ent.util;
 
 import com.davidticona.ent.domain.dto.AdjacentItem;
-import com.davidticona.ent.domain.dto.Node;
+import com.davidticona.ent.domain.dto.TreeNode;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -13,22 +13,28 @@ import java.util.Objects;
 public class Tree {
     private List<AdjacentItem> items;
     
+    public Tree() {}
+
     public Tree(List<AdjacentItem> items) {
         this.items = items;
     }
     
-    public List<Node> getTree() {
+    public void setItems(List<AdjacentItem> items) {
+        this.items = items;
+    }
+    
+    public List<TreeNode> getTree() {
         return buildTree(this.items, null);
     }
     
-    public List<Node> getTree(Integer parentId) {
+    public List<TreeNode> getTree(Integer parentId) {
         return buildTree(this.items, parentId);
     }
     
-    private List<Node> buildTree(List<AdjacentItem> elements, Integer parentId) {
-        List<Node> output = new LinkedList<>();
+    private List<TreeNode> buildTree(List<AdjacentItem> elements, Integer parentId) {
+        List<TreeNode> output = new LinkedList<>();
         for (AdjacentItem item : groupByParentId(parentId)) {
-            Node newNode = new Node(item.id(), item.code(), item.name());
+            TreeNode newNode = new TreeNode(item.id(), item.code(), item.name());
             boolean isParent = hasChildren(item.id());
             if (isParent) {
                 newNode.setChildren(buildTree(elements, item.id()));

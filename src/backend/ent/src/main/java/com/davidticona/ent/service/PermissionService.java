@@ -1,6 +1,7 @@
 package com.davidticona.ent.service;
 
 import com.davidticona.ent.domain.entity.Permission;
+import com.davidticona.ent.domain.projection.AdjacentPermission;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ import java.util.List;
 public interface PermissionService {
     void create(Permission permission);
     List<Permission> read();
+    List<AdjacentPermission> getAll();
     void update(Integer id, Permission permission);
     void delete(Integer id);
     
