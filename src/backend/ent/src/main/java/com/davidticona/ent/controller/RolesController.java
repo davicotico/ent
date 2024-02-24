@@ -1,6 +1,5 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.dto.AdjacentItem;
 import com.davidticona.ent.domain.dto.TreeNode;
 import com.davidticona.ent.domain.projection.AdjacentPermission;
 import com.davidticona.ent.service.RoleService;

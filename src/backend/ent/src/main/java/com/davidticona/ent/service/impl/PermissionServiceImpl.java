@@ -28,8 +28,8 @@ public class PermissionServiceImpl implements PermissionService{
     }
     
     @Override
-    public List<AdjacentPermission> getAll() {
-        return repository.getAllPermissions();
+    public List<AdjacentPermission> getAll(Integer applicationId) {
+        return repository.getAllPermissions(applicationId);
     }
 
     @Override

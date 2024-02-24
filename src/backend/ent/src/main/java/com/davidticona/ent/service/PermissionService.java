@@ -11,7 +11,7 @@ import java.util.List;
 public interface PermissionService {
     void create(Permission permission);
     List<Permission> read();
-    List<AdjacentPermission> getAll();
+    List<AdjacentPermission> getAll(Integer applicationId);
     void update(Integer id, Permission permission);
     void delete(Integer id);
     
