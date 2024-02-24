@@ -1,5 +1,6 @@
 package com.davidticona.ent.controller;
 
+import com.davidticona.ent.domain.dto.AdjacentItem;
 import com.davidticona.ent.domain.dto.TreeNode;
 import com.davidticona.ent.domain.projection.AdjacentPermission;
 import com.davidticona.ent.service.RoleService;
@@ -36,13 +37,13 @@ public class RolesController {
     }
     
     @GetMapping("/{id}/permissions")
-    public List<TreeNode> getPermissionsByRoleId(@PathVariable("id") Integer roleId) {
-        List<AdjacentPermission> permissions = roleService.getPermissions(roleId);
-        return new Tree(permissionMaper.toAdjacentItem(permissions)).getTree(1);
+    public List<AdjacentItem> getPermissionsByRoleId(@PathVariable("id") Integer roleId) {
+        List<AdjacentPermission> permissions = roleService.getPermissions(roleId, 1);
+        return permissionMaper.toAdjacentItem(permissions);
     }
     
     @GetMapping("/{id}/permissions-tree")
-    public Map<String, List<TreeNode>> test(@PathVariable("id") Integer roleId) {
+    public List<TreeNode> test(@PathVariable("id") Integer roleId) {
         return roleService.getPermissionsAsTree(roleId, 1);
     }
 }

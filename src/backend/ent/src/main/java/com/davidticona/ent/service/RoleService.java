@@ -4,7 +4,6 @@ import com.davidticona.ent.domain.dto.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.projection.AdjacentPermission;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -19,8 +18,9 @@ public interface RoleService {
     boolean roleExists(Integer id);
     boolean roleExists(List<Integer> ids);
     
-    List<AdjacentPermission> getPermissions(Integer roleId);
-    Map<String, List<TreeNode>> getPermissionsAsTree(Integer roleId, Integer applicationId);
+    List<AdjacentPermission> getPermissions(Integer roleId, Integer applicationId);
+    List<TreeNode> getPermissionsAsTree(Integer roleId, Integer applicationId);
+    
     void addPermission(Integer permissionId);
     void removePermission(Integer permissionId);
 }

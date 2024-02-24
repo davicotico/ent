@@ -18,17 +18,25 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    from ent.role_permission rp 
                    inner join ent."permission" p on (rp.permission_id = p.id)
                    where rp.role_id = :roleId and p.application_id = :applicationId
-                   
                    union all
-                   
                    select pr.id, pr.parent_id, pr.code, pr.name, false as is_root
-                   from ent."permission" as pr -- recursive
+                   from ent."permission" as pr
                    join c on c.id = pr. parent_id
                    )
-                   
                    select id, parent_id as parentId, code, name, is_root as isRoot
                    from c
                    order by id asc
+                   """, nativeQuery = true)
+    List<AdjacentPermission> getPermissionsTreesByRoleId(
+            @Param("roleId") Integer roleId,
+            @Param("applicationId") Integer applicationId
+    );
+    
+    @Query(value = """
+                   select p.id, p.parent_id as parentId, p.code, p.name
+                   from ent.role_permission rp 
+                   inner join ent."permission" p on (rp.permission_id = p.id)
+                   where rp.role_id = :roleId and p.application_id = :applicationId
                    """, nativeQuery = true)
     List<AdjacentPermission> getPermissionsByRoleId(
             @Param("roleId") Integer roleId,

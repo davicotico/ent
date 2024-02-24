@@ -8,6 +8,7 @@ import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,19 +68,20 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<AdjacentPermission> getPermissions(Integer roleId) {
-        return repository.getPermissionsByRoleId(roleId, 1);
+    public List<AdjacentPermission> getPermissions(Integer roleId, Integer applicationId) {
+        return repository.getPermissionsByRoleId(roleId, applicationId);
     }
 
     @Override
-    public Map<String, List<TreeNode>> getPermissionsAsTree(
-            Integer roleId, Integer applicationId) {
-        Map<String, List<TreeNode>> trees = new HashMap<>();
-        List<AdjacentPermission> permissions = repository.getPermissionsByRoleId(roleId, applicationId);
-        List<AdjacentPermission> assigned = permissions.stream().filter(item -> item.getIsRoot() == true).toList();
+    public List<TreeNode> getPermissionsAsTree(Integer roleId, Integer applicationId) {
+        List<TreeNode> trees = new LinkedList<>();
+        List<AdjacentPermission> permissions = repository.getPermissionsTreesByRoleId(roleId, applicationId);
+        List<AdjacentPermission> rootPermissions = permissions.stream().filter(item -> item.getIsRoot() == true).toList();
         Tree treeBuilder = new Tree(permissionMaper.toAdjacentItem(permissions));
-        for (AdjacentPermission item : assigned) {
-            trees.put(item.getCode(), treeBuilder.getTree(item.getId()));
+        for (AdjacentPermission item : rootPermissions) {
+            TreeNode newTree = new TreeNode(item.getId(), item.getCode(), item.getName());
+            newTree.setChildren(treeBuilder.getTree(item.getId()));
+            trees.add(newTree);
         }
         return trees;
     }
