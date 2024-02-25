@@ -20,7 +20,7 @@ NIST Level 2 RBAC requires Roles and/or Permissions to be hierarchical, so that 
 
 Open in Postman `docs\postman\ent.postman_collection.json`
 
-### TODO
+## TODO
 
 #### Roles
 
@@ -31,7 +31,7 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 #### Users
 - [x] Get all users (by applicationId)
 - [ ] Get all roles (by applicationId & userId)
-- [x] Get all roles trees (by applicationId & userId)
+- [ ] Get all roles trees (by applicationId & userId)
 
 #### Permissions
 
