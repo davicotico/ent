@@ -1,10 +1,9 @@
 package com.davidticona.ent.controller;
 
 import com.davidticona.ent.domain.dto.TreeNode;
-import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.RoleProjection;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree;
-import com.davidticona.ent.util.mapper.PermissionMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +30,10 @@ public class RolesController {
     @Autowired
     private RoleMapper mapper;
     
-    @Autowired
-    private PermissionMapper permissionMaper;
-    
     @GetMapping
-    public List<TreeNode> read() {
-        return new Tree(mapper.entityToAdjacentItem(roleService.read())).getTree();
+    public ResponseEntity<List<RoleProjection>> getAll(
+            @RequestHeader(name = "Application-Id") Integer applicationId) {
+        return ResponseEntity.ok(roleService.getAll(applicationId));
     }
 
     @GetMapping("/{id}/permissions")
@@ -45,10 +42,9 @@ public class RolesController {
             @PathVariable("id") Integer roleId,
             @RequestParam(name = "showTree") Optional<Boolean> showTree) {
         if (showTree.isPresent() && Objects.equals(showTree.get(), Boolean.TRUE)) {
-            return ResponseEntity.ok(roleService.getPermissionsAsTree(roleId, applicationId));
+            return ResponseEntity.ok(roleService.getPermissionsTrees(roleId, applicationId));
         }
-        List<AdjacentPermission> permissions = roleService.getPermissions(roleId, applicationId);
-        return ResponseEntity.ok(permissionMaper.toAdjacentItem(permissions));
+        return ResponseEntity.ok(roleService.getPermissions(roleId, applicationId));
     }
 }
 

@@ -1,6 +1,7 @@
 package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.entity.User;
+import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.domain.repository.UserRepository;
 import com.davidticona.ent.service.UserService;
 import java.util.List;
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> read() {
-        return this.repository.findAll();
+    public List<UserProjection> read(Integer applicationId) {
+        return this.repository.findAll(applicationId);
     }
 
     @Override

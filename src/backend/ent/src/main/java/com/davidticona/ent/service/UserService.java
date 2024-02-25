@@ -1,6 +1,7 @@
 package com.davidticona.ent.service;
 
 import com.davidticona.ent.domain.entity.User;
+import com.davidticona.ent.domain.projection.UserProjection;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface UserService {
     void create(User user);
-    List<User> read();
+    List<UserProjection> read(Integer applicationId);
     void update(Integer id, User user);
     void delete(Integer id);
     
@@ -18,6 +19,7 @@ public interface UserService {
     
     void authenticate();
     List<String> getAuthorizationList();
+    
     
     void addRole(Integer roleId);
     void addRole(List<Integer> roleIds);

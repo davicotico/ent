@@ -2,6 +2,7 @@ package com.davidticona.ent.domain.repository;
 
 import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.RoleProjection;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,13 @@ import org.springframework.data.repository.query.Param;
  * @author David Tomas Ticona Saravia
  */
 public interface RoleRepository extends JpaRepository<Role, Integer>{
+    @Query(value = """
+                   SELECT r.id, r.parent_id as parentId, r.code, r.name
+                   FROM ent.role as r
+                   WHERE r.application_id = :applicationId
+                   """, nativeQuery = true)
+    List<RoleProjection> findAll(@Param("applicationId") Integer applicationId);
+    
     @Query(value = """
                    with recursive c as (
                    select p.id, p.parent_id, p.code, p.name, true as is_root
@@ -28,8 +36,8 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    order by id asc
                    """, nativeQuery = true)
     List<AdjacentPermission> getPermissionsTreesByRoleId(
-            @Param("roleId") Integer roleId,
-            @Param("applicationId") Integer applicationId
+            @Param("applicationId") Integer applicationId,
+            @Param("roleId") Integer roleId
     );
     
     @Query(value = """

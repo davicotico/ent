@@ -13,9 +13,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface PermissionRepository extends JpaRepository<Permission, Integer> {
     @Query(value = """
-                   SELECT p.id, 
-                   p.parent_id as parentId,
-                   p.code, p.name
+                   SELECT p.id, p.parent_id as parentId, p.code, p.name
                    FROM ent.permission as p
                    WHERE p.application_id = :applicationId
                    """, nativeQuery = true)

@@ -1,8 +1,10 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.domain.dto.AdjacentItem;
 import com.davidticona.ent.domain.dto.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.RoleProjection;
 import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree;
@@ -31,8 +33,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> read() {
-        return repository.findAll();
+    public List<Role> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<RoleProjection> getAll(Integer applicationId) {
+        return repository.findAll(applicationId);
     }
 
     @Override
@@ -66,12 +73,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<AdjacentPermission> getPermissions(Integer roleId, Integer applicationId) {
-        return repository.getPermissionsByRoleId(roleId, applicationId);
+    public List<AdjacentItem> getPermissions(Integer roleId, Integer applicationId) {
+        List<AdjacentPermission> permissions = repository.getPermissionsByRoleId(roleId, applicationId);
+        return permissionMaper.toAdjacentItem(permissions);
     }
 
     @Override
-    public List<TreeNode> getPermissionsAsTree(Integer roleId, Integer applicationId) {
+    public List<TreeNode> getPermissionsTrees(Integer roleId, Integer applicationId) {
         List<TreeNode> trees = new LinkedList<>();
         List<AdjacentPermission> permissions = repository.getPermissionsTreesByRoleId(roleId, applicationId);
         List<AdjacentPermission> rootPermissions = permissions.stream().filter(item -> item.getIsRoot() == true).toList();
@@ -83,5 +91,7 @@ public class RoleServiceImpl implements RoleService {
         }
         return trees;
     }
+
+    
     
 }
