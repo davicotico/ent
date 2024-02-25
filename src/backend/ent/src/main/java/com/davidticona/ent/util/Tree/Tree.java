@@ -1,7 +1,5 @@
-package com.davidticona.ent.util;
+package com.davidticona.ent.util.Tree;
 
-import com.davidticona.ent.domain.dto.AdjacentItem;
-import com.davidticona.ent.domain.dto.TreeNode;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;

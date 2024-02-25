@@ -1,6 +1,6 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.AdjacentItem;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.domain.entity.Role;
 import java.util.List;
 import org.mapstruct.Mapper;

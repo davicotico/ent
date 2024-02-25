@@ -1,5 +1,6 @@
-package com.davidticona.ent.domain.dto;
+package com.davidticona.ent.util.Tree;
 
+import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +20,6 @@ public class TreeNode {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.children = new LinkedList<>();
     }
 }

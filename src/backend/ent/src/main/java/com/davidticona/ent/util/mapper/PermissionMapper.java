@@ -1,11 +1,12 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.AdjacentItem;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.PermissionProjection;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 
 /**
  *
@@ -16,7 +17,8 @@ public interface PermissionMapper {
     AdjacentItem entityToAdjacentItem(Permission item);
     List<AdjacentItem> entityToAdjacentItem(List<Permission> item);
     
-    AdjacentItem toAdjacentItem(AdjacentPermission item);
-    List<AdjacentItem> toAdjacentItem(List<AdjacentPermission> item);
+    AdjacentItem toAdjacentItem(AdjacentItemProjection item);
+    List<AdjacentItem> toAdjacentItem(List<AdjacentItemProjection> item);
+    List<AdjacentItem> toListAdjacentItem(List<PermissionProjection> item);
     
 }

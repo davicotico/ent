@@ -1,7 +1,7 @@
 package com.davidticona.ent.domain.repository;
 
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.PermissionProjection;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +17,6 @@ public interface PermissionRepository extends JpaRepository<Permission, Integer>
                    FROM ent.permission as p
                    WHERE p.application_id = :applicationId
                    """, nativeQuery = true)
-    List<AdjacentPermission> getAllPermissions(
+    List<PermissionProjection> getAllPermissions(
             @Param("applicationId") Integer applicationId);
 }

@@ -1,7 +1,7 @@
 package com.davidticona.ent.service;
 
-import com.davidticona.ent.domain.dto.AdjacentItem;
-import com.davidticona.ent.domain.dto.TreeNode;
+import com.davidticona.ent.util.Tree.AdjacentItem;
+import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.projection.RoleProjection;
 import java.util.List;
@@ -21,8 +21,8 @@ public interface RoleService {
     boolean roleExists(Integer id);
     boolean roleExists(List<Integer> ids);
     
-    List<AdjacentItem> getPermissions(Integer roleId, Integer applicationId);
-    List<TreeNode> getPermissionsTrees(Integer roleId, Integer applicationId);
+    List<AdjacentItem> getPermissions(Integer applicationId, Integer roleId);
+    List<TreeNode> getPermissionsTrees(Integer applicationId, Integer roleId);
     
     void addPermission(Integer permissionId);
     void removePermission(Integer permissionId);

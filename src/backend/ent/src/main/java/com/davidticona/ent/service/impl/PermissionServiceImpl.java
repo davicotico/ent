@@ -1,12 +1,16 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.projection.AdjacentPermission;
+import com.davidticona.ent.domain.projection.PermissionProjection;
 import com.davidticona.ent.domain.repository.PermissionRepository;
 import com.davidticona.ent.service.PermissionService;
+import com.davidticona.ent.util.Tree.Tree;
+import com.davidticona.ent.util.mapper.PermissionMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 
 /**
  *
@@ -16,20 +20,24 @@ import org.springframework.stereotype.Service;
 public class PermissionServiceImpl implements PermissionService{
     @Autowired
     PermissionRepository repository;
+    
+    @Autowired
+    private PermissionMapper mapper;
 
     @Override
     public void create(Permission permission) {
         repository.save(permission);
     }
-
+    
     @Override
-    public List<Permission> read() {
-        return repository.findAll();
+    public List<PermissionProjection> getAll(Integer applicationId) {
+        return repository.getAllPermissions(applicationId);
     }
     
     @Override
-    public List<AdjacentPermission> getAll(Integer applicationId) {
-        return repository.getAllPermissions(applicationId);
+    public List<TreeNode> getAllTreeView(Integer applicationId) {
+        return new Tree(mapper.toListAdjacentItem(
+                this.getAll(applicationId))).getTree();
     }
 
     @Override
@@ -51,5 +59,7 @@ public class PermissionServiceImpl implements PermissionService{
     public boolean permissionExists(List<Integer> ids) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
     
 }

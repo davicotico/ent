@@ -1,12 +1,12 @@
 package com.davidticona.ent.domain.repository;
 
 import com.davidticona.ent.domain.entity.Role;
-import com.davidticona.ent.domain.projection.AdjacentPermission;
 import com.davidticona.ent.domain.projection.RoleProjection;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 
 /**
  *
@@ -35,7 +35,7 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    from c
                    order by id asc
                    """, nativeQuery = true)
-    List<AdjacentPermission> getPermissionsTreesByRoleId(
+    List<AdjacentItemProjection> getPermissionsTreesByRoleId(
             @Param("applicationId") Integer applicationId,
             @Param("roleId") Integer roleId
     );
@@ -46,7 +46,7 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    inner join ent."permission" p on (rp.permission_id = p.id)
                    where rp.role_id = :roleId and p.application_id = :applicationId
                    """, nativeQuery = true)
-    List<AdjacentPermission> getPermissionsByRoleId(
+    List<AdjacentItemProjection> getPermissionsByRoleId(
             @Param("roleId") Integer roleId,
             @Param("applicationId") Integer applicationId
     );
