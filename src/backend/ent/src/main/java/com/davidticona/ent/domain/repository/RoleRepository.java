@@ -13,6 +13,8 @@ import com.davidticona.ent.domain.projection.AdjacentItemProjection;
  * @author David Tomas Ticona Saravia
  */
 public interface RoleRepository extends JpaRepository<Role, Integer>{
+    List<Role> findByApplicationId(Integer applicationId);
+    
     @Query(value = """
                    SELECT r.id, r.parent_id as parentId, r.code, r.name
                    FROM ent.role as r

@@ -24,6 +24,9 @@ public class Role {
     Integer id;
     
     @Column
+    Integer applicationId;
+    
+    @Column
     Integer parentId;
     
     @Column

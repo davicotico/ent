@@ -3,7 +3,6 @@ package com.davidticona.ent.service.impl;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
-import com.davidticona.ent.domain.projection.RoleProjection;
 import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree.Tree;
@@ -13,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
+import com.davidticona.ent.util.mapper.RoleMapper;
 
 /**
  *
@@ -27,6 +27,9 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private PermissionMapper permissionMaper;
     
+    @Autowired
+    private RoleMapper roleMapper;
+    
     @Override
     public void create(Role role) {
         this.repository.save(role);
@@ -38,8 +41,15 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleProjection> getAll(Integer applicationId) {
-        return repository.findAll(applicationId);
+    public List<AdjacentItem> getAll(Integer applicationId) {
+        return roleMapper.entityToAdjacentItem(
+                repository.findByApplicationId(applicationId)
+        );
+    }
+    
+    @Override
+    public List<TreeNode> getAllTreeView(Integer applicationId) {
+        return new Tree(this.getAll(applicationId)).getTree();
     }
 
     @Override
@@ -90,8 +100,5 @@ public class RoleServiceImpl implements RoleService {
             trees.add(newTree);
         }
         return trees;
-    }
-
-    
-    
+    }    
 }

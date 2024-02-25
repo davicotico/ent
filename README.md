@@ -25,6 +25,7 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 #### Roles
 
 - [x] Get all roles (by applicationId)
+- [x] Get all roles tree (by applicationId)
 - [x] Get all permissions (by applicationId & roleId)
 - [x] Get all permissions trees (by applicationId & roleId)
 
@@ -35,7 +36,7 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 
 #### Permissions
 
-- [ ] Get all permissions (by applicationId)
+- [x] Get all permissions (by applicationId)
 - [x] Get all permissions tree (by applicationId)
 
 

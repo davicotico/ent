@@ -2,7 +2,7 @@ package com.davidticona.ent.service;
 
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.projection.PermissionProjection;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
 public interface PermissionService {
     void create(Permission permission);
     
-    List<PermissionProjection> getAll(Integer applicationId);
+    List<AdjacentItem> getAll(Integer applicationId);
     List<TreeNode> getAllTreeView(Integer applicationId);
     
     void update(Integer id, Permission permission);

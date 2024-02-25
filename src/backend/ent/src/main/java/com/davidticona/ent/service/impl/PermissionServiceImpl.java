@@ -2,15 +2,14 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
-import com.davidticona.ent.domain.projection.PermissionProjection;
 import com.davidticona.ent.domain.repository.PermissionRepository;
 import com.davidticona.ent.service.PermissionService;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 
 /**
  *
@@ -30,14 +29,14 @@ public class PermissionServiceImpl implements PermissionService{
     }
     
     @Override
-    public List<PermissionProjection> getAll(Integer applicationId) {
-        return repository.getAllPermissions(applicationId);
+    public List<AdjacentItem>getAll(Integer applicationId) {
+        return mapper.entityToAdjacentItem(
+                repository.getAllPermissions(applicationId));
     }
     
     @Override
     public List<TreeNode> getAllTreeView(Integer applicationId) {
-        return new Tree(mapper.toListAdjacentItem(
-                this.getAll(applicationId))).getTree();
+        return new Tree(this.getAll(applicationId)).getTree();
     }
 
     @Override

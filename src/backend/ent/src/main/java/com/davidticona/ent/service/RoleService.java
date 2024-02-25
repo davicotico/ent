@@ -3,7 +3,6 @@ package com.davidticona.ent.service;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
-import com.davidticona.ent.domain.projection.RoleProjection;
 import java.util.List;
 
 /**
@@ -16,7 +15,8 @@ public interface RoleService {
     void delete(Integer id);
     
     List<Role> getAll();
-    List<RoleProjection> getAll(Integer applicationId);
+    List<AdjacentItem> getAll(Integer applicationId);
+    List<TreeNode> getAllTreeView(Integer applicationId);
     
     boolean roleExists(Integer id);
     boolean roleExists(List<Integer> ids);

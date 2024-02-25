@@ -1,7 +1,7 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.projection.RoleProjection;
 import com.davidticona.ent.service.RoleService;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +25,12 @@ public class RolesController {
     private RoleService roleService;
 
     @GetMapping
-    public ResponseEntity<List<RoleProjection>> getAll(
-            @RequestHeader(name = "Application-Id") Integer applicationId) {
+    public ResponseEntity<?> getAll(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @RequestParam(name = "showTree") Optional<Boolean> showTree) {
+        if (showTree.isPresent() && Objects.equals(showTree.get(), Boolean.TRUE)) {
+            return ResponseEntity.ok(roleService.getAllTreeView(applicationId));
+        }
         return ResponseEntity.ok(roleService.getAll(applicationId));
     }
 
