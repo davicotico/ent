@@ -35,8 +35,8 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 
 #### Permissions
 
-- [x] Get all permissions (by applicationId)
-- [ ] Get all permissions tree (by applicationId)
+- [ ] Get all permissions (by applicationId)
+- [x] Get all permissions tree (by applicationId)
 
 
 
