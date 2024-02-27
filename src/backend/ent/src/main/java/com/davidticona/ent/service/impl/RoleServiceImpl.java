@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
     RoleRepository repository;
     
     @Autowired
-    private PermissionMapper permissionMaper;
+    private PermissionMapper permissionMapper;
     
     @Autowired
     private RoleMapper roleMapper;
@@ -85,7 +85,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<AdjacentItem> getPermissions(Integer applicationId, Integer roleId) {
         List<AdjacentItemProjection> permissions = repository.getPermissionsByRoleId(roleId, applicationId);
-        return permissionMaper.toAdjacentItem(permissions);
+        return permissionMapper.toAdjacentItem(permissions);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class RoleServiceImpl implements RoleService {
         List<TreeNode> trees = new LinkedList<>();
         List<AdjacentItemProjection> permissions = repository.getPermissionsTreesByRoleId(applicationId, roleId);
         List<AdjacentItemProjection> rootPermissions = permissions.stream().filter(item -> item.getIsRoot() == true).toList();
-        Tree treeBuilder = new Tree(permissionMaper.toAdjacentItem(permissions));
+        Tree treeBuilder = new Tree(permissionMapper.toAdjacentItem(permissions));
         for (AdjacentItemProjection item : rootPermissions) {
             TreeNode newTree = new TreeNode(item.getId(), item.getCode(), item.getName());
             newTree.setChildren(treeBuilder.getTree(item.getId()));

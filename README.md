@@ -28,16 +28,19 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 - [x] Get all roles tree (by applicationId)
 - [x] Get all permissions (by applicationId & roleId)
 - [x] Get all permissions trees (by applicationId & roleId)
+- [ ] Add role
 
 #### Users
 - [x] Get all users (by applicationId)
-- [ ] Get all roles (by applicationId & userId)
-- [ ] Get all roles trees (by applicationId & userId)
+- [x] Get all roles (by applicationId & userId)
+- [x] Get all roles trees (by applicationId & userId)
+- [ ] Add user
 
 #### Permissions
 
 - [x] Get all permissions (by applicationId)
 - [x] Get all permissions tree (by applicationId)
+- [ ] Add permision
 
 
 

@@ -108,6 +108,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Roles by User Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/3/roles?showTree=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"3",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "showTree",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

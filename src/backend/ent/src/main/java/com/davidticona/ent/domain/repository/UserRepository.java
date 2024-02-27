@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
  * @author David Tomas Ticona Saravia
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
+
     @Query(value = """
            select u.id, u.username, u.email, u.is_valid_email as isValidEmail, u.active, u.created_at as createdAt
            from ent.application_user as au
@@ -31,4 +32,24 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<AdjacentItemProjection> getRolesByUserId(
             @Param("applicationId") Integer applicationId,
             @Param("userId") Integer userId);
+    
+    @Query(value = """
+                   with recursive adj as (
+                      select r.id, r.parent_id, r.code, r.name, true as is_root
+                      from ent.user_role as ur
+                      inner join ent."role" r on (ur.role_id = r.id)
+                      where ur.user_id = :userId and r.application_id = :applicationId
+                      union all
+                      select rr.id, rr.parent_id, rr.code, rr.name, false as is_root
+                      from ent."role" as rr -- role recursive
+                      join adj on adj.id = rr. parent_id
+                   )
+                      select id, parent_id as parentId, code, name, is_root as isRoot
+                      from adj
+                      order by id asc
+                   """, nativeQuery = true)
+    List<AdjacentItemProjection> getRolesTreesByRoleId(
+            @Param("applicationId") Integer applicationId,
+            @Param("userId") Integer userId
+    );
 }
