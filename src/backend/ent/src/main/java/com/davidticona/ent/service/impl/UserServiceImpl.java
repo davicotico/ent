@@ -4,6 +4,8 @@ import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.domain.repository.UserRepository;
 import com.davidticona.ent.service.UserService;
+import com.davidticona.ent.util.Tree.AdjacentItem;
+import com.davidticona.ent.util.mapper.RoleMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserRepository repository;
+    
+    @Autowired
+    private RoleMapper roleMapper;
     
     @Override
     public void create(User user) {
@@ -76,6 +81,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeRole(List<Integer> roleIds) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<AdjacentItem> getRoles(Integer applicationId, Integer userId) {
+        return roleMapper.toAdjacentItem(repository.getRolesByUserId(applicationId, userId));
     }
     
 }

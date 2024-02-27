@@ -2,6 +2,7 @@ package com.davidticona.ent.util.mapper;
 
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.domain.entity.Role;
+import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -12,8 +13,9 @@ import org.mapstruct.ReportingPolicy;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoleMapper {
-    
     AdjacentItem entityToAdjacentItem(Role item);
-    
     List<AdjacentItem> entityToAdjacentItem(List<Role> item);
+    
+    AdjacentItem toAdjacentItem(AdjacentItemProjection item);
+    List<AdjacentItem> toAdjacentItem(List<AdjacentItemProjection> item);
 }

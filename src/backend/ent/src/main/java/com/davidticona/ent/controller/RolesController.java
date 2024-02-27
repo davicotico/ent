@@ -1,8 +1,6 @@
 package com.davidticona.ent.controller;
 
 import com.davidticona.ent.service.RoleService;
-import com.davidticona.ent.util.Tree.AdjacentItem;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

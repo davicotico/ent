@@ -2,6 +2,7 @@ package com.davidticona.ent.service;
 
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.UserProjection;
+import com.davidticona.ent.util.Tree.AdjacentItem;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface UserService {
     void authenticate();
     List<String> getAuthorizationList();
     
-    
+    List<AdjacentItem> getRoles(Integer applicationId, Integer userId);
     void addRole(Integer roleId);
     void addRole(List<Integer> roleIds);
     void removeRole(Integer roleId);
