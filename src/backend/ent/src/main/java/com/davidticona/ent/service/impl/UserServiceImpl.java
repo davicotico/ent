@@ -1,5 +1,6 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.domain.dto.UserDto;
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
@@ -9,6 +10,7 @@ import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.util.mapper.RoleMapper;
+import com.davidticona.ent.util.mapper.UserMapper;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +27,26 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
     
     @Autowired
+    private UserMapper userMapper;
+    
+    @Autowired
     private RoleMapper roleMapper;
     
     @Override
-    public void create(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public UserDto create(UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        System.out.println("Entity: " + user.getEmail());
+        System.out.println(user.toString());
+        return userMapper.toDto(this.repository.save(user));
     }
 
     @Override
     public List<UserProjection> read(Integer applicationId) {
         return this.repository.findAll(applicationId);
     }
-
+    
     @Override
-    public void update(Integer id, User user) {
+    public void update(Integer id, UserDto user) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

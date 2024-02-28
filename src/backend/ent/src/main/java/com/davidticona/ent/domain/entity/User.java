@@ -38,6 +38,9 @@ public class User {
     @Column
     Boolean isValidEmail;
     
+    @Column
+    Boolean active;
+    
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
     LocalDateTime createdAt;

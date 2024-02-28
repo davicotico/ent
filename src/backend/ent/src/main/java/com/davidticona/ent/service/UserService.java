@@ -1,5 +1,6 @@
 package com.davidticona.ent.service;
 
+import com.davidticona.ent.domain.dto.UserDto;
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.util.Tree.AdjacentItem;
@@ -11,9 +12,9 @@ import java.util.List;
  * @author David Tomas Ticona Saravia
  */
 public interface UserService {
-    void create(User user);
+    UserDto create(UserDto user);
     List<UserProjection> read(Integer applicationId);
-    void update(Integer id, User user);
+    void update(Integer id, UserDto user);
     void delete(Integer id);
     
     boolean userExists(Integer id);
