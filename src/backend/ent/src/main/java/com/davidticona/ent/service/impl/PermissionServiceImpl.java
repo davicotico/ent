@@ -1,5 +1,7 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.domain.dto.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.PermissionResponseDto;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.repository.PermissionRepository;
@@ -24,8 +26,8 @@ public class PermissionServiceImpl implements PermissionService{
     private PermissionMapper mapper;
 
     @Override
-    public void create(Permission permission) {
-        repository.save(permission);
+    public PermissionResponseDto create(PermissionRequestDto permission) {
+        return mapper.toDto(repository.save(mapper.toEntity(permission)));
     }
     
     @Override

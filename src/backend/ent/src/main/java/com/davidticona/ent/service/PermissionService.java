@@ -1,5 +1,7 @@
 package com.davidticona.ent.service;
 
+import com.davidticona.ent.domain.dto.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.PermissionResponseDto;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.util.Tree.AdjacentItem;
@@ -10,7 +12,7 @@ import java.util.List;
  * @author David Tomas Ticona Saravia
  */
 public interface PermissionService {
-    void create(Permission permission);
+    PermissionResponseDto create(PermissionRequestDto permission);
     
     List<AdjacentItem> getAll(Integer applicationId);
     List<TreeNode> getAllTreeView(Integer applicationId);
