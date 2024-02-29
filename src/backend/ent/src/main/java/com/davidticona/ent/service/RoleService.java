@@ -1,5 +1,7 @@
 package com.davidticona.ent.service;
 
+import com.davidticona.ent.domain.dto.RoleRequestDto;
+import com.davidticona.ent.domain.dto.RoleResponseDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
@@ -10,7 +12,7 @@ import java.util.List;
  * @author David Tomas Ticona Saravia
  */
 public interface RoleService {
-    void create(Role role);
+    RoleResponseDto create(RoleRequestDto role);
     void update(Integer id, Role role);
     void delete(Integer id);
     

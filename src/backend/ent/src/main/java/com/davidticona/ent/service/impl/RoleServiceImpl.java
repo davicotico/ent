@@ -1,5 +1,7 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.domain.dto.RoleRequestDto;
+import com.davidticona.ent.domain.dto.RoleResponseDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
@@ -31,8 +33,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     
     @Override
-    public void create(Role role) {
-        this.repository.save(role);
+    public RoleResponseDto create(RoleRequestDto role) {
+        return roleMapper.toDto(this.repository.save(roleMapper.toEntity(role)));
     }
 
     @Override
