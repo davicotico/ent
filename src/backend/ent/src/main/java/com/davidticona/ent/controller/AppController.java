@@ -3,10 +3,10 @@ package com.davidticona.ent.controller;
 import com.davidticona.ent.domain.dto.AppRequestDto;
 import com.davidticona.ent.domain.dto.AppResponseDto;
 import com.davidticona.ent.service.AppService;
-import com.davidticona.ent.validator.ObjectValidator;
-import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,22 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppController {
     @Autowired
     private AppService service;
-    
-    private final ObjectValidator<AppRequestDto> validator;
-    
-    public AppController(ObjectValidator<AppRequestDto> validator) {
-        this.validator = validator;
+
+    @GetMapping
+    public ResponseEntity<List<AppResponseDto>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
     
     @PostMapping
-    public ResponseEntity<?> add(
+    public ResponseEntity<AppResponseDto> create(
             @RequestBody AppRequestDto app) {
-        
-        var errors = validator.validate(app);
-        if (!errors.isEmpty()) {
-            return ResponseEntity.badRequest().body(errors);
-        }
-        
-        return ResponseEntity.ok( service.create(app));
+        return ResponseEntity.ok(service.create(app));
     }
 }

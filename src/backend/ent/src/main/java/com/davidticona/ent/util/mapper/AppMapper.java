@@ -3,6 +3,7 @@ package com.davidticona.ent.util.mapper;
 import com.davidticona.ent.domain.dto.AppRequestDto;
 import com.davidticona.ent.domain.dto.AppResponseDto;
 import com.davidticona.ent.domain.entity.AppEntity;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -14,4 +15,5 @@ import org.mapstruct.ReportingPolicy;
 public interface AppMapper {
     AppEntity toEntity(AppRequestDto app);
     AppResponseDto toDto(AppEntity app);
+    List<AppResponseDto> toDto(List<AppEntity> apps);
 }

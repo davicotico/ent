@@ -1,10 +1,10 @@
 package com.davidticona.ent.validator;
 
+import com.davidticona.ent.exceptions.ObjectNotValidException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -19,13 +19,13 @@ public class ObjectValidator<T> {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
-    public Set<String> validate(T objectDto) {
+    public void validate(T objectDto) {
         Set<ConstraintViolation<T>> errors = validator.validate(objectDto);
         if (!errors.isEmpty()) {
-            return errors.stream()
+            var errorMessages = errors.stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.toSet());
+            throw new ObjectNotValidException(errorMessages);
         }
-        return Collections.emptySet();
     }
 }
