@@ -9,6 +9,7 @@ import com.davidticona.ent.service.PermissionService;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
+import com.davidticona.ent.validator.ObjectValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,16 @@ public class PermissionServiceImpl implements PermissionService{
     
     @Autowired
     private PermissionMapper mapper;
+    
+    private final ObjectValidator<PermissionRequestDto> validator;
+
+    public PermissionServiceImpl(ObjectValidator<PermissionRequestDto> validator) {
+        this.validator = validator;
+    }
 
     @Override
     public PermissionResponseDto create(PermissionRequestDto permission) {
+        validator.validate(permission);
         return mapper.toDto(repository.save(mapper.toEntity(permission)));
     }
     

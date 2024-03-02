@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.util.mapper.RoleMapper;
+import com.davidticona.ent.validator.ObjectValidator;
 
 /**
  *
@@ -32,8 +33,15 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
     
+    private final ObjectValidator<RoleRequestDto> validator;
+
+    public RoleServiceImpl(ObjectValidator<RoleRequestDto> validator) {
+        this.validator = validator;
+    }
+    
     @Override
     public RoleResponseDto create(RoleRequestDto role) {
+        validator.validate(role);
         return roleMapper.toDto(this.repository.save(roleMapper.toEntity(role)));
     }
 

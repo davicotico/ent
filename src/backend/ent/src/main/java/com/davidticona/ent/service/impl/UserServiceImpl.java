@@ -11,8 +11,10 @@ import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.util.mapper.UserMapper;
+import com.davidticona.ent.validator.ObjectValidator;
 import java.util.LinkedList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
  * @author David Tomas Ticona Saravia
  */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     
     @Autowired
@@ -32,11 +35,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleMapper roleMapper;
     
+    private final ObjectValidator<UserDto> validator;
+    
     @Override
     public UserDto create(UserDto userDto) {
+        validator.validate(userDto);
         User user = userMapper.toEntity(userDto);
-        System.out.println("Entity: " + user.getEmail());
-        System.out.println(user.toString());
         return userMapper.toDto(this.repository.save(user));
     }
 
