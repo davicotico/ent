@@ -1,6 +1,7 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.UserDto;
+import com.davidticona.ent.domain.dto.UserRequestDto;
+import com.davidticona.ent.domain.dto.UserResponseDto;
 import com.davidticona.ent.domain.entity.User;
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -12,9 +13,9 @@ import org.mapstruct.ReportingPolicy;
  */
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
-    User toEntity(UserDto user);
-    List<User> toEntity(List<UserDto> user);
+    User toEntity(UserRequestDto user);
+    List<User> toEntity(List<UserRequestDto> user);
     
-    UserDto toDto(User user);
-    List<UserDto> toDto(List<User> user);
+    UserResponseDto toDto(User user);
+    List<UserResponseDto> toDto(List<User> user);
 }

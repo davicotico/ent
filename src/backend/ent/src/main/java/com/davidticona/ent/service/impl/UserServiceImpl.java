@@ -1,6 +1,7 @@
 package com.davidticona.ent.service.impl;
 
-import com.davidticona.ent.domain.dto.UserDto;
+import com.davidticona.ent.domain.dto.UserRequestDto;
+import com.davidticona.ent.domain.dto.UserResponseDto;
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
@@ -12,6 +13,8 @@ import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.util.mapper.UserMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +38,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleMapper roleMapper;
     
-    private final ObjectValidator<UserDto> validator;
+    private final ObjectValidator<UserRequestDto> validator;
     
     @Override
-    public UserDto create(UserDto userDto) {
+    @Transactional
+    public UserResponseDto create(UserRequestDto userDto) {
         validator.validate(userDto);
         User user = userMapper.toEntity(userDto);
         return userMapper.toDto(this.repository.save(user));
@@ -50,13 +54,21 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public void update(Integer id, UserDto user) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Transactional
+    public void update(Integer id, UserRequestDto userDto) {
+        validator.validate(userDto);
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        user.setEmail(userDto.email());
+        repository.save(user);
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        repository.delete(user);
     }
 
     @Override

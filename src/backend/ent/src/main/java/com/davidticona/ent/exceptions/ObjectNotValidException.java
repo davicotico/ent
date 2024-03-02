@@ -1,7 +1,6 @@
 package com.davidticona.ent.exceptions;
 
 import java.util.List;
-import java.util.Set;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

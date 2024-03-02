@@ -39,7 +39,7 @@ public class User {
     Boolean isValidEmail;
     
     @Column
-    Boolean active;
+    Boolean active = false;
     
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

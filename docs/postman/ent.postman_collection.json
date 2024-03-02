@@ -187,7 +187,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"username\": \"joker\",\r\n    \"email\": \"joker@davidticona.com\",\r\n    \"pass\": \"123456789\",\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"username\": \"joker\",\r\n    \"email\": \"joker@davidticona.com\",\r\n    \"pass\": \"123456789\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,6 +205,68 @@
 								"api",
 								"v1",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"username\": \"joker123\",\r\n    \"email\": \"joker123@davidticona.com\",\r\n    \"pass\": \"123456789\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"username\": \"joker123\",\r\n    \"email\": \"joker123@davidticona.com\",\r\n    \"pass\": \"123456789\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"13"
 							]
 						}
 					},
@@ -290,13 +352,34 @@
 			"name": "Applications",
 			"item": [
 				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CreateApplication",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"myapp\",\r\n    \"name\": \"My application 1\",\r\n    \"description\": \"This is description\",\r\n    \"url\": \"http://localhost\"\r\n}",
+							"raw": "{\r\n    \"code\": \"1234567890123456789011111\",\r\n    \"name\": \"My Great Application\",\r\n    \"description\": \"This is the description\",\r\n    \"url\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

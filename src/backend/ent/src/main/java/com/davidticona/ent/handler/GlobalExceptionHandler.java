@@ -1,6 +1,7 @@
 package com.davidticona.ent.handler;
 
 import com.davidticona.ent.exceptions.ObjectNotValidException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,5 +24,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .badRequest()
                 .body(exception.getErrorMessages());
+    }
+    
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity handleException(EntityNotFoundException exception) {
+        return ResponseEntity.notFound().build();
     }
 }

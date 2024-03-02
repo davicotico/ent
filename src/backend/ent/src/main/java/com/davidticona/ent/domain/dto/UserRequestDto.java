@@ -1,5 +1,6 @@
 package com.davidticona.ent.domain.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -7,9 +8,7 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author David Tomas Ticona Saravia
  */
-public record UserDto(
-        @NotNull
-        Integer applicationId,
+public record UserRequestDto(
         
         @NotNull
         @NotEmpty
@@ -17,10 +16,9 @@ public record UserDto(
         
         @NotNull
         @NotEmpty
+        @Email
         String email,
         
-        String pass,
-        
-        Boolean active) {
+        String pass) {
 
 }

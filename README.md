@@ -22,25 +22,30 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 
 ## TODO
 
+#### Applications
+
+- [x] Get all applications
+- [x] Create application
+
 #### Roles
 
 - [x] Get all roles (by applicationId)
 - [x] Get all roles tree (by applicationId)
 - [x] Get all permissions (by applicationId & roleId)
 - [x] Get all permissions trees (by applicationId & roleId)
-- [ ] Add role
+- [x] Create role
 
 #### Users
 - [x] Get all users (by applicationId)
 - [x] Get all roles (by applicationId & userId)
 - [x] Get all roles trees (by applicationId & userId)
-- [ ] Add user
+- [x] Create user
+- [x] Update user
+- [x] Delete user
 
 #### Permissions
 
 - [x] Get all permissions (by applicationId)
 - [x] Get all permissions tree (by applicationId)
-- [ ] Add permision
-
-
+- [x] Create permision
 
