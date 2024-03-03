@@ -1,4 +1,4 @@
-package com.davidticona.ent.domain.dto;
+package com.davidticona.ent.domain.dto.role;
 
 /**
  *

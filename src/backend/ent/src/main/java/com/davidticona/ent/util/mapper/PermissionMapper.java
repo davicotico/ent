@@ -1,7 +1,7 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.PermissionRequestDto;
-import com.davidticona.ent.domain.dto.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.domain.entity.Permission;
 import java.util.List;

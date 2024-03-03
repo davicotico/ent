@@ -1,7 +1,7 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.AppRequestDto;
-import com.davidticona.ent.domain.dto.AppResponseDto;
+import com.davidticona.ent.domain.dto.app.AppRequestDto;
+import com.davidticona.ent.domain.dto.app.AppResponseDto;
 import com.davidticona.ent.domain.entity.AppEntity;
 import java.util.List;
 import org.mapstruct.Mapper;

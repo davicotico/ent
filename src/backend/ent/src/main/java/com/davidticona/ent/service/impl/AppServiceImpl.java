@@ -1,13 +1,15 @@
 package com.davidticona.ent.service.impl;
 
-import com.davidticona.ent.domain.dto.AppRequestDto;
-import com.davidticona.ent.domain.dto.AppResponseDto;
+import com.davidticona.ent.domain.dto.app.AppRequestDto;
+import com.davidticona.ent.domain.dto.app.AppResponseDto;
 import com.davidticona.ent.domain.entity.AppEntity;
 import com.davidticona.ent.domain.repository.AppRepository;
+import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.service.AppService;
 import com.davidticona.ent.util.mapper.AppMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +60,35 @@ public class AppServiceImpl implements AppService{
     public void delete(Integer id) {
         AppEntity app = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+        List<String> errores = new LinkedList<>();
+        if (hasUsers(id)) {
+            errores.add("Unable to delete record as it has associated users");
+        }
+        if (hasRoles(id)) {
+            errores.add("Unable to delete record as it has associated roles");
+        }
+        if (hasPermissions(id)) {
+            errores.add("Unable to delete record as it has associated permissions");
+        }
+        if (errores.size() > 0) {
+            throw new ConflictException(errores);
+        }
         repository.delete(app);
+    }
+
+    @Override
+    public boolean hasUsers(Integer applicationId) {
+        return (repository.countUsers(applicationId) > 0);
+    }
+
+    @Override
+    public boolean hasRoles(Integer applicationId) {
+        return (repository.countRoles(applicationId) > 0);
+    }
+
+    @Override
+    public boolean hasPermissions(Integer applicationId) {
+        return (repository.countPermissions(applicationId) > 0);
     }
 
 }

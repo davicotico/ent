@@ -1,7 +1,7 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.dto.RoleRequestDto;
-import com.davidticona.ent.domain.dto.RoleResponseDto;
+import com.davidticona.ent.domain.dto.role.RoleRequestDto;
+import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

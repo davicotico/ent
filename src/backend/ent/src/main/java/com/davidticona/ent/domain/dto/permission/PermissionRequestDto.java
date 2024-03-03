@@ -1,6 +1,5 @@
-package com.davidticona.ent.domain.dto;
+package com.davidticona.ent.domain.dto.permission;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -8,17 +7,18 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author David Tomas Ticona Saravia
  */
-public record UserRequestDto(
+public record PermissionRequestDto(
+        @NotNull
+        Integer applicationId,
+        
+        Integer parentId,
         
         @NotNull
         @NotEmpty
-        String username, 
+        String code,
         
         @NotNull
         @NotEmpty
-        @Email
-        String email,
-        
-        String pass) {
+        String name) {
 
 }

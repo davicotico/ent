@@ -1,11 +1,11 @@
-package com.davidticona.ent.domain.dto;
+package com.davidticona.ent.domain.dto.app;
 
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 /**
  *
- * @author David Tomas Ticona
+ * @author David Tomas Ticona Saravia
  */
 public record AppRequestDto(
         @NotNull
@@ -20,6 +20,7 @@ public record AppRequestDto(
         @Length(max = 150)
         String description,
         
+        @Length(max = 250)
         String url
         ) {
 

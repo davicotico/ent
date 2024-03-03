@@ -1,7 +1,7 @@
 package com.davidticona.ent.service;
 
-import com.davidticona.ent.domain.dto.AppRequestDto;
-import com.davidticona.ent.domain.dto.AppResponseDto;
+import com.davidticona.ent.domain.dto.app.AppRequestDto;
+import com.davidticona.ent.domain.dto.app.AppResponseDto;
 import java.util.List;
 
 /**
@@ -13,4 +13,8 @@ public interface AppService {
     AppResponseDto create(AppRequestDto app);
     AppResponseDto update(Integer id, AppRequestDto app);
     void delete(Integer id);
+    
+    boolean hasUsers(Integer applicationId);
+    boolean hasRoles(Integer applicationId);
+    boolean hasPermissions(Integer applicationId);
 }

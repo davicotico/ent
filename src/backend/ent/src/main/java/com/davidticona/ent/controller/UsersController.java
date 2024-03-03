@@ -1,7 +1,7 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.dto.UserRequestDto;
-import com.davidticona.ent.domain.dto.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserRequestDto;
+import com.davidticona.ent.domain.dto.user.UserResponseDto;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.service.UserService;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.davidticona.ent.service;
 
-import com.davidticona.ent.domain.dto.UserRequestDto;
-import com.davidticona.ent.domain.dto.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserRequestDto;
+import com.davidticona.ent.domain.dto.user.UserResponseDto;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;

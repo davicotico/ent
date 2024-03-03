@@ -1,7 +1,6 @@
 package com.davidticona.ent.exceptions;
 
 import java.util.List;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class ObjectNotValidException extends RuntimeException {
-
+public class ConflictException extends RuntimeException {
     private final List<String> errorMessages;
 }

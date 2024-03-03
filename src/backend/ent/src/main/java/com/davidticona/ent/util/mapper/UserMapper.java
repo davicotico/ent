@@ -1,7 +1,7 @@
 package com.davidticona.ent.util.mapper;
 
-import com.davidticona.ent.domain.dto.UserRequestDto;
-import com.davidticona.ent.domain.dto.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserRequestDto;
+import com.davidticona.ent.domain.dto.user.UserResponseDto;
 import com.davidticona.ent.domain.entity.User;
 import java.util.List;
 import org.mapstruct.Mapper;

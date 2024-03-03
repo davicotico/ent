@@ -1,7 +1,7 @@
 package com.davidticona.ent.service.impl;
 
-import com.davidticona.ent.domain.dto.PermissionRequestDto;
-import com.davidticona.ent.domain.dto.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.repository.PermissionRepository;

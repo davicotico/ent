@@ -1,7 +1,7 @@
 package com.davidticona.ent.service.impl;
 
-import com.davidticona.ent.domain.dto.RoleRequestDto;
-import com.davidticona.ent.domain.dto.RoleResponseDto;
+import com.davidticona.ent.domain.dto.role.RoleRequestDto;
+import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;

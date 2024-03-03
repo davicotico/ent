@@ -1,7 +1,7 @@
 package com.davidticona.ent.controller;
 
-import com.davidticona.ent.domain.dto.PermissionRequestDto;
-import com.davidticona.ent.domain.dto.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
 import com.davidticona.ent.service.PermissionService;
 import java.util.Objects;
 import java.util.Optional;
