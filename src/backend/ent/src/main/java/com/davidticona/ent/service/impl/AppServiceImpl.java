@@ -70,7 +70,7 @@ public class AppServiceImpl implements AppService{
         if (hasPermissions(id)) {
             errors.add("Unable to delete record as it has associated permissions");
         }
-        if (errors.size() > 0) {
+        if (!errors.isEmpty()) {
             throw new ConflictException(errors);
         }
         repository.delete(app);

@@ -18,4 +18,18 @@ public interface PermissionRepository extends JpaRepository<Permission, Integer>
                    """)
     List<Permission> getAllPermissions(
             @Param("applicationId") Integer applicationId);
+
+    @Query(value = """
+                   select count(*) as c
+                   from ent.role_permission as rp
+                   where rp.permission_id = :permissionId
+                   """, nativeQuery = true)
+    Integer countRoles(@Param("permissionId") Integer id);
+    
+    @Query(value = """
+                   select count(*) as c
+                   from ent."permission" as p
+                   where p.parent_id = :permissionId
+                   """, nativeQuery = true)
+    Integer countChildren(@Param("permissionId") Integer id);
 }

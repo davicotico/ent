@@ -19,6 +19,9 @@ public interface PermissionService {
     PermissionResponseDto update(Integer id, PermissionRequestDto permission);
     void delete(Integer id);
     
+    boolean hasRoles(Integer id);
+    boolean hasChildren(Integer id);
+    
     boolean permissionExists(Integer id);
     boolean permissionExists(List<Integer> ids);
 }
