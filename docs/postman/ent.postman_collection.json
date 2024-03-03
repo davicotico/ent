@@ -7,6 +7,115 @@
 	},
 	"item": [
 		{
+			"name": "Applications",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateApplication",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"1234567890123456789011111\",\r\n    \"name\": \"My Great Application\",\r\n    \"description\": \"This is the description\",\r\n    \"url\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/applications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateApplication",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"123\",\r\n    \"name\": \"My Great Application\",\r\n    \"description\": \"This is the description\",\r\n    \"url\": \"hhtps://\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/applications/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"applications",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteApplication",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/applications/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"applications",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Roles",
 			"item": [
 				{
@@ -108,6 +217,71 @@
 								"api",
 								"v1",
 								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRole",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"NUEVO ROL\",\r\n    \"name\": \"NUEVO ROL (UPDATED)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRole",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"12"
 							]
 						}
 					},
@@ -345,41 +519,21 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Applications",
-			"item": [
-				{
-					"name": "GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/applications",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"applications"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "CreateApplication",
+					"name": "UpdatePermission",
 					"request": {
-						"method": "POST",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\": \"1234567890123456789011111\",\r\n    \"name\": \"My Great Application\",\r\n    \"description\": \"This is the description\",\r\n    \"url\": true\r\n}",
+							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"updated\",\r\n    \"name\": \"updated\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -387,7 +541,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/applications",
+							"raw": "http://localhost:8080/api/v1/permissions/18",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -396,7 +550,36 @@
 							"path": [
 								"api",
 								"v1",
-								"applications"
+								"permissions",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePermission",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/permissions/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"permissions",
+								"19"
 							]
 						}
 					},
