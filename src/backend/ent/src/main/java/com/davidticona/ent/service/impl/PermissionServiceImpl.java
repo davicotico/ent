@@ -10,6 +10,8 @@ import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,13 +52,22 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     @Override
-    public void update(Integer id, Permission permission) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Transactional
+    public PermissionResponseDto update(Integer id, PermissionRequestDto permissionDto) {
+        validator.validate(permissionDto);
+        Permission permission = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        permission.setCode(permissionDto.code());
+        permission.setName(permissionDto.name());
+        return mapper.toDto(repository.save(permission));
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Permission permission = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        repository.delete(permission);
     }
 
     @Override
@@ -67,8 +78,5 @@ public class PermissionServiceImpl implements PermissionService{
     @Override
     public boolean permissionExists(List<Integer> ids) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
-    
+    }    
 }
