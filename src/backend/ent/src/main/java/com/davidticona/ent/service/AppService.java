@@ -9,6 +9,8 @@ import java.util.List;
  * @author David Tomas Ticona
  */
 public interface AppService {
-    AppResponseDto create(AppRequestDto app);
     List<AppResponseDto> getAll();
+    AppResponseDto create(AppRequestDto app);
+    AppResponseDto update(Integer id, AppRequestDto app);
+    void delete(Integer id);
 }
