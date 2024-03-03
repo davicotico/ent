@@ -23,6 +23,10 @@ public interface RoleService {
     boolean roleExists(Integer id);
     boolean roleExists(List<Integer> ids);
     
+    boolean hasUsers(Integer id);
+    boolean hasPermissions(Integer id);
+    boolean hasChildren(Integer id);
+    
     List<AdjacentItem> getPermissions(Integer applicationId, Integer roleId);
     List<TreeNode> getPermissionsTrees(Integer applicationId, Integer roleId);
     

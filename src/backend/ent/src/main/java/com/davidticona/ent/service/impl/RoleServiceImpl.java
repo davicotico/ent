@@ -14,6 +14,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
+import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
@@ -77,6 +78,19 @@ public class RoleServiceImpl implements RoleService {
     public void delete(Integer id) {
         Role role = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+        List<String> errors = new LinkedList<>();
+        if (hasUsers(id)) {
+            errors.add("Unable to delete record as it has associated users");
+        }
+        if (hasPermissions(id)) {
+            errors.add("Unable to delete record as it has associated permissions");
+        }
+        if (hasChildren(id)) {
+            errors.add("Unable to delete record as it has associated roles");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         repository.delete(role);
     }
 
@@ -119,4 +133,19 @@ public class RoleServiceImpl implements RoleService {
         }
         return trees;
     }    
+
+    @Override
+    public boolean hasUsers(Integer id) {
+        return (repository.countUsers(id) > 0);
+    }
+
+    @Override
+    public boolean hasPermissions(Integer id) {
+        return (repository.countPermissions(id) > 0);
+    }
+
+    @Override
+    public boolean hasChildren(Integer id) {
+        return (repository.countChildren(id) > 0);
+    }
 }

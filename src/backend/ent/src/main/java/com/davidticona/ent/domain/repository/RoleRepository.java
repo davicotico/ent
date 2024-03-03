@@ -52,4 +52,25 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
             @Param("roleId") Integer roleId,
             @Param("applicationId") Integer applicationId
     );
+
+    @Query(value = """
+                   select count(*) as c
+                   from ent.user_role as ur
+                   where ur.role_id = :roleId
+                   """, nativeQuery = true)
+    Integer countUsers(@Param("roleId") Integer roleId);
+
+    @Query(value = """
+                   select count(*) as c
+                   from ent.role_permission as rp
+                   where rp.role_id = :roleId
+                   """, nativeQuery = true)
+    Integer countPermissions(@Param("roleId") Integer roleId);
+    
+    @Query(value = """
+                   select count(*) as c
+                   from ent."role" as r
+                   where r.parent_id = :roleId
+                   """, nativeQuery = true)
+    Integer countChildren(@Param("roleId") Integer roleId);
 }
