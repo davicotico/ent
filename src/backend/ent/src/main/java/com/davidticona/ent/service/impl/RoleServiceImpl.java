@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import jakarta.persistence.EntityNotFoundException;
 
 /**
  *
@@ -63,13 +64,20 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void update(Integer id, Role role) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public RoleResponseDto update(Integer id, RoleRequestDto roleDto) {
+        validator.validate(roleDto);
+        Role role = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        role.setCode(roleDto.code());
+        role.setName(roleDto.name());
+        return roleMapper.toDto(repository.save(role));
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Role role = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        repository.delete(role);
     }
 
     @Override

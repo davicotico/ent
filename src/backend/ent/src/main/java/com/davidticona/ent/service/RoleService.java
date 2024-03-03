@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface RoleService {
     RoleResponseDto create(RoleRequestDto role);
-    void update(Integer id, Role role);
+    RoleResponseDto update(Integer id, RoleRequestDto role);
     void delete(Integer id);
     
     List<Role> getAll();
