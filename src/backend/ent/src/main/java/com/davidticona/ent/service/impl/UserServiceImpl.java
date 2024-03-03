@@ -6,6 +6,7 @@ import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.domain.repository.UserRepository;
+import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.service.UserService;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
@@ -68,6 +69,16 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+        List<String> errors = new LinkedList<>();
+        if (hasApplications(id)) {
+            errors.add("Unable to delete record as it has associated applications");
+        }
+        if (hasRoles(id)) {
+            errors.add("Unable to delete record as it has associated roles");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         repository.delete(user);
     }
 
@@ -128,6 +139,16 @@ public class UserServiceImpl implements UserService {
             trees.add(newTree);
         }
         return trees;
+    }
+
+    @Override
+    public boolean hasApplications(Integer userId) {
+        return (repository.hasApplications(userId) > 0);
+    }
+
+    @Override
+    public boolean hasRoles(Integer userId) {
+        return (repository.hasRoles(userId) > 0);
     }
     
 }

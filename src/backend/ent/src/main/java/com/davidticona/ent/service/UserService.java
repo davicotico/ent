@@ -26,6 +26,9 @@ public interface UserService {
     List<AdjacentItem> getRoles(Integer applicationId, Integer userId);
     List<TreeNode> getRolesTrees(Integer applicationId, Integer roleId);
     
+    boolean hasApplications(Integer userId);
+    boolean hasRoles(Integer userId);
+    
     void addRole(Integer roleId);
     void addRole(List<Integer> roleIds);
     void removeRole(Integer roleId);

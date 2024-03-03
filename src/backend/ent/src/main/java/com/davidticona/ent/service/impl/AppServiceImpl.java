@@ -60,18 +60,18 @@ public class AppServiceImpl implements AppService{
     public void delete(Integer id) {
         AppEntity app = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
-        List<String> errores = new LinkedList<>();
+        List<String> errors = new LinkedList<>();
         if (hasUsers(id)) {
-            errores.add("Unable to delete record as it has associated users");
+            errors.add("Unable to delete record as it has associated users");
         }
         if (hasRoles(id)) {
-            errores.add("Unable to delete record as it has associated roles");
+            errors.add("Unable to delete record as it has associated roles");
         }
         if (hasPermissions(id)) {
-            errores.add("Unable to delete record as it has associated permissions");
+            errors.add("Unable to delete record as it has associated permissions");
         }
-        if (errores.size() > 0) {
-            throw new ConflictException(errores);
+        if (errors.size() > 0) {
+            throw new ConflictException(errors);
         }
         repository.delete(app);
     }
