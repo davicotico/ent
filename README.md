@@ -26,6 +26,8 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 
 - [x] Get all applications
 - [x] Create application
+- [x] Update application
+- [x] Delete application
 
 #### Roles
 
@@ -34,8 +36,11 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 - [x] Get all permissions (by applicationId & roleId)
 - [x] Get all permissions trees (by applicationId & roleId)
 - [x] Create role
+- [x] Update role
+- [x] Delete role
 
 #### Users
+
 - [x] Get all users (by applicationId)
 - [x] Get all roles (by applicationId & userId)
 - [x] Get all roles trees (by applicationId & userId)
@@ -47,5 +52,6 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 
 - [x] Get all permissions (by applicationId)
 - [x] Get all permissions tree (by applicationId)
-- [x] Create permision
-
+- [x] Create permission
+- [x] Update permission
+- [x] Delete permission
