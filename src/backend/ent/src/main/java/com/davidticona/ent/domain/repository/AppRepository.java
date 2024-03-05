@@ -30,4 +30,16 @@ public interface AppRepository extends JpaRepository<AppEntity, Integer> {
                    where r.application_id = :applicationId
                    """, nativeQuery = true)
     Integer countPermissions(@Param("applicationId") Integer applicationId);
+    
+    @Query(value = """
+                   select 
+                   case when (count(*) > 0)
+                     then true
+                     else false
+                   end
+                   as c 
+                   from ent."application" as a
+                   where a.code = :code
+                   """, nativeQuery = true)
+    boolean existsByCode(@Param("code") String code); 
 }

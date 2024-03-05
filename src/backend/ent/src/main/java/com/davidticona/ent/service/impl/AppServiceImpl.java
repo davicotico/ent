@@ -41,6 +41,13 @@ public class AppServiceImpl implements AppService{
     @Override
     public AppResponseDto create(AppRequestDto appDto) {
         validator.validate(appDto);
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByCode(appDto.code())) {
+            errors.add("Code already exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         return mapper.toDto(repository.save(mapper.toEntity(appDto)));
     }
 
