@@ -2,6 +2,7 @@ package com.davidticona.ent.controller;
 
 import com.davidticona.ent.domain.dto.role.RoleRequestDto;
 import com.davidticona.ent.domain.dto.role.RoleResponseDto;
+import com.davidticona.ent.domain.dto.role.RoleUpdateRequestDto;
 import com.davidticona.ent.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,7 +61,7 @@ public class RolesController {
     @PutMapping("/{id}")
     public ResponseEntity update(
             @PathVariable Integer id, 
-            @RequestBody RoleRequestDto roleDto) {
+            @RequestBody RoleUpdateRequestDto roleDto) {
         service.update(id, roleDto);
         return ResponseEntity.noContent().build();
     }

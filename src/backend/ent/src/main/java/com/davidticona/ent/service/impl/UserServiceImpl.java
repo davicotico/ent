@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleMapper roleMapper;
     
-    private final ObjectValidator<UserRequestDto> validator;
+    private final ObjectValidator validator;
     
     @Override
     @Transactional

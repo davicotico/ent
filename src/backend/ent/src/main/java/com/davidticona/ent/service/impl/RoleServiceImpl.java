@@ -2,6 +2,7 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.dto.role.RoleRequestDto;
 import com.davidticona.ent.domain.dto.role.RoleResponseDto;
+import com.davidticona.ent.domain.dto.role.RoleUpdateRequestDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
@@ -35,9 +36,9 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
     
-    private final ObjectValidator<RoleRequestDto> validator;
+    private final ObjectValidator validator;
 
-    public RoleServiceImpl(ObjectValidator<RoleRequestDto> validator) {
+    public RoleServiceImpl(ObjectValidator validator) {
         this.validator = validator;
     }
     
@@ -45,6 +46,16 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponseDto create(RoleRequestDto role) {
         validator.validate(role);
         return roleMapper.toDto(this.repository.save(roleMapper.toEntity(role)));
+    }
+    
+    @Override
+    public RoleResponseDto update(Integer id, RoleUpdateRequestDto roleDto) {
+        validator.<RoleUpdateRequestDto>validate(roleDto);
+        Role role = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        role.setCode(roleDto.code());
+        role.setName(roleDto.name());
+        return roleMapper.toDto(repository.save(role));
     }
 
     @Override
@@ -64,15 +75,7 @@ public class RoleServiceImpl implements RoleService {
         return new Tree(this.getAll(applicationId)).getTree();
     }
 
-    @Override
-    public RoleResponseDto update(Integer id, RoleRequestDto roleDto) {
-        validator.validate(roleDto);
-        Role role = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
-        role.setCode(roleDto.code());
-        role.setName(roleDto.name());
-        return roleMapper.toDto(repository.save(role));
-    }
+    
 
     @Override
     public void delete(Integer id) {

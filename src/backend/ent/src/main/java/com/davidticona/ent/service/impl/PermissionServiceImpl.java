@@ -2,6 +2,7 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
 import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionUpdateRequestDto;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.repository.PermissionRepository;
@@ -30,9 +31,9 @@ public class PermissionServiceImpl implements PermissionService{
     @Autowired
     private PermissionMapper mapper;
     
-    private final ObjectValidator<PermissionRequestDto> validator;
+    private final ObjectValidator validator;
 
-    public PermissionServiceImpl(ObjectValidator<PermissionRequestDto> validator) {
+    public PermissionServiceImpl(ObjectValidator validator) {
         this.validator = validator;
     }
 
@@ -43,27 +44,16 @@ public class PermissionServiceImpl implements PermissionService{
     }
     
     @Override
-    public List<AdjacentItem>getAll(Integer applicationId) {
-        return mapper.entityToAdjacentItem(
-                repository.getAllPermissions(applicationId));
-    }
-    
-    @Override
-    public List<TreeNode> getAllTreeView(Integer applicationId) {
-        return new Tree(this.getAll(applicationId)).getTree();
-    }
-
-    @Override
     @Transactional
-    public PermissionResponseDto update(Integer id, PermissionRequestDto permissionDto) {
-        validator.validate(permissionDto);
+    public PermissionResponseDto update(Integer id, PermissionUpdateRequestDto permissionDto) {
+        validator.<PermissionUpdateRequestDto>validate(permissionDto);
         Permission permission = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
         permission.setCode(permissionDto.code());
         permission.setName(permissionDto.name());
         return mapper.toDto(repository.save(permission));
     }
-
+    
     @Override
     @Transactional
     public void delete(Integer id) {
@@ -80,6 +70,17 @@ public class PermissionServiceImpl implements PermissionService{
             throw new ConflictException(errors);
         }
         repository.delete(permission);
+    }
+
+    @Override
+    public List<AdjacentItem>getAll(Integer applicationId) {
+        return mapper.entityToAdjacentItem(
+                repository.getAllPermissions(applicationId));
+    }
+    
+    @Override
+    public List<TreeNode> getAllTreeView(Integer applicationId) {
+        return new Tree(this.getAll(applicationId)).getTree();
     }
 
     @Override

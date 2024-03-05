@@ -27,9 +27,9 @@ public class AppServiceImpl implements AppService{
     @Autowired
     AppMapper mapper;
     
-    private final ObjectValidator<AppRequestDto> validator;
+    private final ObjectValidator validator;
 
-    public AppServiceImpl(ObjectValidator<AppRequestDto> validator) {
+    public AppServiceImpl(ObjectValidator validator) {
         this.validator = validator;
     }
 

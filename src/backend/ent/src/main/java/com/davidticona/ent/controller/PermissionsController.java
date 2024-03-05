@@ -2,6 +2,7 @@ package com.davidticona.ent.controller;
 
 import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
 import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionUpdateRequestDto;
 import com.davidticona.ent.service.PermissionService;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public class PermissionsController {
     @PutMapping("/{id}")
     public ResponseEntity update(
             @PathVariable Integer id, 
-            @RequestBody PermissionRequestDto permissionDto) {
+            @RequestBody PermissionUpdateRequestDto permissionDto) {
         service.update(id, permissionDto);
         return ResponseEntity.noContent().build();
     }

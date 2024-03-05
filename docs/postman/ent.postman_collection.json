@@ -116,180 +116,6 @@
 			]
 		},
 		{
-			"name": "Roles",
-			"item": [
-				{
-					"name": "GetAll",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles?showTree=true",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles"
-							],
-							"query": [
-								{
-									"key": "showTree",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Permissions by Role Id",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles/4/permissions?showTree=true",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles",
-								"4",
-								"permissions"
-							],
-							"query": [
-								{
-									"key": "showTree",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateRole",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"nuevo-rol\",\r\n    \"name\": \"nuevo rol\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateRole",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"NUEVO ROL\",\r\n    \"name\": \"NUEVO ROL (UPDATED)\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles/12",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles",
-								"12"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteRole",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles/13",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles",
-								"13"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Users",
 			"item": [
 				{
@@ -440,6 +266,180 @@
 			]
 		},
 		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles?showTree=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "showTree",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Permissions by Role Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/4/permissions?showTree=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"4",
+								"permissions"
+							],
+							"query": [
+								{
+									"key": "showTree",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateRole",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"nuevo-rol\",\r\n    \"name\": \"nuevo rol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRole",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"Admin\",\r\n    \"name\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRole",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Permissions",
 			"item": [
 				{
@@ -524,7 +524,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"parentId\": 1,\r\n    \"code\": \"updated\",\r\n    \"name\": \"updated\"\r\n}",
+							"raw": "{\r\n    \"code\": \"Edit\",\r\n    \"name\": \"Edit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -532,7 +532,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/permissions/18",
+							"raw": "http://localhost:8080/api/v1/permissions/15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -542,7 +542,7 @@
 								"api",
 								"v1",
 								"permissions",
-								"18"
+								"15"
 							]
 						}
 					},

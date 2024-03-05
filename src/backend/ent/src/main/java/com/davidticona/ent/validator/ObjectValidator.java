@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
  * @author David Tomas Ticona Saravia
  */
 @Component
-public class ObjectValidator<T> {
+public class ObjectValidator {
 
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
-    public void validate(T objectDto) {
+    public <T> void validate(T objectDto) {
         Set<ConstraintViolation<T>> errors = validator.validate(objectDto);
         if (!errors.isEmpty()) {
             var errorMessages = errors.stream()
