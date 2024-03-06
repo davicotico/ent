@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"applicationId\": 1,\r\n    \"username\": \"joker123\",\r\n    \"email\": \"joker123@davidticona.com\",\r\n    \"pass\": \"123456789\",\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"username\": \"megamind\",\r\n    \"email\": \"joker1234555454@davidticona.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -225,7 +225,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/users/10",
+							"raw": "http://localhost:8080/api/v1/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -235,7 +235,7 @@
 								"api",
 								"v1",
 								"users",
-								"10"
+								"1"
 							]
 						}
 					},

@@ -67,4 +67,25 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                    """, nativeQuery = true)
     Integer hasRoles(Integer userId);
     
+    @Query(value = """
+                   select 
+                   case
+                     when (select COUNT(*) from ent."user" as u where u.username = :username) > 0 
+                     then true 
+                     else false
+                   end  as resultado
+                   """, nativeQuery = true)
+    boolean existsByUsername(@Param("username") String username);
+    
+    @Query(value = """
+                   select 
+                   case
+                     when (select COUNT(*) from ent."user" as u where (u.username = :username and u.id <> :userId)) > 0 
+                     then true 
+                     else false
+                   end  as resultado
+                   """, nativeQuery = true)
+    boolean existsByUsername(
+            @Param("username") String username,
+            @Param("userId") Integer ignoredUserId);
 }

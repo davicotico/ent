@@ -2,6 +2,7 @@ package com.davidticona.ent.service;
 
 import com.davidticona.ent.domain.dto.user.UserRequestDto;
 import com.davidticona.ent.domain.dto.user.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserUpdateRequestDto;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
@@ -14,7 +15,8 @@ import java.util.List;
 public interface UserService {
     UserResponseDto create(UserRequestDto user);
     List<UserProjection> read(Integer applicationId);
-    void update(Integer id, UserRequestDto user);
+    
+    void update(Integer id, UserUpdateRequestDto user);
     void delete(Integer id);
     
     boolean userExists(Integer id);

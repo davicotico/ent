@@ -8,8 +8,7 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author David Tomas Ticona Saravia
  */
-public record UserRequestDto(
-        
+public record UserUpdateRequestDto(
         @NotNull
         @NotEmpty
         String username, 
@@ -17,10 +16,7 @@ public record UserRequestDto(
         @NotNull
         @NotEmpty
         @Email
-        String email,
-        
-        @NotNull
-        @NotEmpty
-        String pass) {
+        String email
+        ) {
 
 }

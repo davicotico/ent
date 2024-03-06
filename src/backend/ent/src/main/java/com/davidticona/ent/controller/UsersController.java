@@ -2,6 +2,7 @@ package com.davidticona.ent.controller;
 
 import com.davidticona.ent.domain.dto.user.UserRequestDto;
 import com.davidticona.ent.domain.dto.user.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserUpdateRequestDto;
 import com.davidticona.ent.domain.projection.UserProjection;
 import com.davidticona.ent.service.UserService;
 import java.util.List;
@@ -48,7 +49,7 @@ public class UsersController {
     @PutMapping("/{id}")
     public ResponseEntity update(
             @PathVariable Integer id, 
-            @RequestBody UserRequestDto user) {
+            @RequestBody UserUpdateRequestDto user) {
         userService.update(id, user);
         return ResponseEntity.noContent().build();
     }

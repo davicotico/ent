@@ -2,6 +2,7 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.dto.user.UserRequestDto;
 import com.davidticona.ent.domain.dto.user.UserResponseDto;
+import com.davidticona.ent.domain.dto.user.UserUpdateRequestDto;
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
@@ -42,24 +43,40 @@ public class UserServiceImpl implements UserService {
     private final ObjectValidator validator;
     
     @Override
-    @Transactional
-    public UserResponseDto create(UserRequestDto userDto) {
-        validator.validate(userDto);
-        User user = userMapper.toEntity(userDto);
-        return userMapper.toDto(this.repository.save(user));
-    }
-
-    @Override
     public List<UserProjection> read(Integer applicationId) {
         return this.repository.findAll(applicationId);
     }
     
     @Override
     @Transactional
-    public void update(Integer id, UserRequestDto userDto) {
+    public UserResponseDto create(UserRequestDto userDto) {
         validator.validate(userDto);
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByUsername(userDto.username())) {
+            errors.add("Username exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
+        User user = userMapper.toEntity(userDto);
+        return userMapper.toDto(this.repository.save(user));
+    }
+    
+    @Override
+    @Transactional
+    public void update(Integer id, UserUpdateRequestDto userDto) {
+        validator.<UserUpdateRequestDto>validate(userDto);
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByUsername(userDto.username(), id)) {
+            errors.add("Username exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
+        
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+        user.setUsername(userDto.username());
         user.setEmail(userDto.email());
         repository.save(user);
     }
