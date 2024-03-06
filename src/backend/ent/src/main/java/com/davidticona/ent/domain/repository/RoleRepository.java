@@ -73,4 +73,17 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    where r.parent_id = :roleId
                    """, nativeQuery = true)
     Integer countChildren(@Param("roleId") Integer roleId);
+    
+    @Query(value = """
+                   select 
+                   case
+                     when (select COUNT(*) from ent."role" as r where (r.code = :code and r.application_id = :applicationId)) > 0 
+                     then true 
+                     else false
+                   end as exists
+                   """, nativeQuery = true)
+    boolean existsByCodeAndApplicationId(
+            @Param("code") String code,
+            @Param("applicationId") Integer applicationId
+    );
 }

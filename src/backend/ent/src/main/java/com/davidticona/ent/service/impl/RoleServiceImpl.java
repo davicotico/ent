@@ -45,6 +45,13 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleResponseDto create(RoleRequestDto role) {
         validator.validate(role);
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByCodeAndApplicationId(role.code(), role.applicationId())) {
+            errors.add("Code exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         return roleMapper.toDto(this.repository.save(roleMapper.toEntity(role)));
     }
     
