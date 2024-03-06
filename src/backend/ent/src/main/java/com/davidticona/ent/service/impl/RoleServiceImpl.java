@@ -19,6 +19,7 @@ import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.Objects;
 
 /**
  *
@@ -46,9 +47,14 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponseDto create(RoleRequestDto role) {
         validator.validate(role);
         List<String> errors = new LinkedList<>();
+        if (Objects.isNull(role.parentId())) {
+            errors.add("parent id can not be null");
+            throw new ConflictException(errors);
+        }
         if (repository.existsByCodeAndApplicationId(role.code(), role.applicationId())) {
             errors.add("Code exists");
         }
+        
         if (!repository.findByIdAndApplicationId(role.parentId(), role.applicationId()).isPresent()) {
             errors.add("parent id does not exists");
         }
