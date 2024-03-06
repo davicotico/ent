@@ -49,6 +49,9 @@ public class RoleServiceImpl implements RoleService {
         if (repository.existsByCodeAndApplicationId(role.code(), role.applicationId())) {
             errors.add("Code exists");
         }
+        if (!repository.findByIdAndApplicationId(role.parentId(), role.applicationId()).isPresent()) {
+            errors.add("parent id does not exists");
+        }
         if (!errors.isEmpty()) {
             throw new ConflictException(errors);
         }
@@ -81,8 +84,6 @@ public class RoleServiceImpl implements RoleService {
     public List<TreeNode> getAllTreeView(Integer applicationId) {
         return new Tree(this.getAll(applicationId)).getTree();
     }
-
-    
 
     @Override
     public void delete(Integer id) {

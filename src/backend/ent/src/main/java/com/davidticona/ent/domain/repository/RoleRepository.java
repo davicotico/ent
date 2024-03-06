@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
+import java.util.Optional;
 
 /**
  *
@@ -86,4 +87,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
             @Param("code") String code,
             @Param("applicationId") Integer applicationId
     );
+    
+    Optional<Role> findByIdAndApplicationId(Integer id, Integer applicationId);
 }
