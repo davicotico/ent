@@ -89,4 +89,15 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
     );
     
     Optional<Role> findByIdAndApplicationId(Integer id, Integer applicationId);
+    
+    @Query(value = """
+                   select 
+                   case when (count(*) > 0)
+                   then true
+                   else false
+                   end e
+                   from ent."role" r 
+                   where r.parent_id is null and application_id = :applicationId
+                   """, nativeQuery = true)
+    boolean existsRootByApplicationId(@Param("applicationId") Integer applicationId);
 }

@@ -17,6 +17,8 @@ public interface RoleService {
     RoleResponseDto update(Integer id, RoleUpdateRequestDto role);
     void delete(Integer id);
     
+    RoleResponseDto createRoot(Integer applicationId);
+    
     List<Role> getAll();
     List<AdjacentItem> getAll(Integer applicationId);
     List<TreeNode> getAllTreeView(Integer applicationId);

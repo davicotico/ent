@@ -13,12 +13,13 @@ import java.util.List;
  */
 public interface PermissionService {
     PermissionResponseDto create(PermissionRequestDto permission);
+    PermissionResponseDto update(Integer id, PermissionUpdateRequestDto permission);
+    void delete(Integer id);
+    
+    PermissionResponseDto createRoot(Integer applicationId);
     
     List<AdjacentItem> getAll(Integer applicationId);
     List<TreeNode> getAllTreeView(Integer applicationId);
-    
-    PermissionResponseDto update(Integer id, PermissionUpdateRequestDto permission);
-    void delete(Integer id);
     
     boolean hasRoles(Integer id);
     boolean hasChildren(Integer id);

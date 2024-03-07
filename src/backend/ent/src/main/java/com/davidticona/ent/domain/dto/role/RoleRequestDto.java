@@ -11,6 +11,7 @@ public record RoleRequestDto(
         @NotNull(message = "ID de la aplicación es requerido")
         Integer applicationId,
         
+        @NotNull(message = "parent id can not be null")
         Integer parentId,
         
         @NotNull(message = "Código del rol es requerido")

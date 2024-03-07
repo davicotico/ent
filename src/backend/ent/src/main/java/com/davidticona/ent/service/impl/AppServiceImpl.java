@@ -6,9 +6,12 @@ import com.davidticona.ent.domain.entity.AppEntity;
 import com.davidticona.ent.domain.repository.AppRepository;
 import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.service.AppService;
+import com.davidticona.ent.service.PermissionService;
+import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.mapper.AppMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,12 @@ public class AppServiceImpl implements AppService{
     @Autowired
     AppMapper mapper;
     
+    @Autowired
+    private RoleService roleService;
+    
+    @Autowired
+    private PermissionService permissionService;
+    
     private final ObjectValidator validator;
 
     public AppServiceImpl(ObjectValidator validator) {
@@ -39,6 +48,7 @@ public class AppServiceImpl implements AppService{
     }
 
     @Override
+    @Transactional
     public AppResponseDto create(AppRequestDto appDto) {
         validator.validate(appDto);
         List<String> errors = new LinkedList<>();
@@ -48,7 +58,10 @@ public class AppServiceImpl implements AppService{
         if (!errors.isEmpty()) {
             throw new ConflictException(errors);
         }
-        return mapper.toDto(repository.save(mapper.toEntity(appDto)));
+        AppEntity newApp = repository.save(mapper.toEntity(appDto));
+        roleService.createRoot(newApp.getId());
+        permissionService.createRoot(newApp.getId());
+        return mapper.toDto(newApp);
     }
 
     @Override

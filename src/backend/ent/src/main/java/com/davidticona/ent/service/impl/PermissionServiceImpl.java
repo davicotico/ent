@@ -1,5 +1,6 @@
 package com.davidticona.ent.service.impl;
 
+import com.davidticona.ent.domain.EntityFactory;
 import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
 import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
 import com.davidticona.ent.domain.dto.permission.PermissionUpdateRequestDto;
@@ -41,6 +42,11 @@ public class PermissionServiceImpl implements PermissionService{
     public PermissionResponseDto create(PermissionRequestDto permission) {
         validator.validate(permission);
         return mapper.toDto(repository.save(mapper.toEntity(permission)));
+    }
+    
+    @Override
+    public PermissionResponseDto createRoot(Integer applicationId) {
+        return mapper.toDto(repository.save(EntityFactory.rootPermission(applicationId)));
     }
     
     @Override
