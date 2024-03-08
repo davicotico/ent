@@ -11,6 +11,7 @@ public record PermissionRequestDto(
         @NotNull
         Integer applicationId,
         
+        @NotNull
         Integer parentId,
         
         @NotNull

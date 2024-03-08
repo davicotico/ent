@@ -1,35 +1,55 @@
 # Constraints
 
 ## Application
-Code unique
+
+- [x] Code unique
 
 ## Role
 
+- [x] Code unique
+
 ### Create
-Code unique
-Parent id not null
-Parent id is valid if exists in Application
+
+- [x] Parent id not null
+- [x] Parent id is valid if exists in Application
 
 ### Create root
-Only one root (Parent id: don't repeat a null value)
+
+- [x] Only one root (Parent id: don't repeat a null value)
 
 ### Update
-Code unique
+
+- [x] Code unique
+
+### Delete
+
+- [x] Check if has children
+- [x] Check if has permissions
 
 ###  Move
-Parent id != Id
-Parent id not null
-Parent id exists in Application
 
+- [ ] Parent id != Id
+- [ ] Parent id not null
+- [ ] Parent id exists in Application
 
 ## Permission
 
+- [ ] Code unique
+
 ### Create
-Code unique
-Parent id not null
-Parent id is valid if exists in Application
+
+- [x] Parent id not null
+- [x] Parent id is valid if exists in Application
+
+### Update
+- [x] Code unique
+
+### Delete
+- [x] Check if has children
+- [x] Check if has roles
 
 ### Move
-Parent id != Id
-Parent id not null
-Parent id exists in Application
+
+- [ ] Parent id != Id
+- [ ] Parent id not null
+- [ ] Parent id exists in Application

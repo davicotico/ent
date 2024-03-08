@@ -41,6 +41,14 @@ public class PermissionServiceImpl implements PermissionService{
     @Override
     public PermissionResponseDto create(PermissionRequestDto permission) {
         validator.validate(permission);
+        List<String> errors = new LinkedList<>();
+        if (!repository.findByIdAndApplicationId(permission.parentId(), permission.applicationId())
+                .isPresent()) {
+            throw new EntityNotFoundException("Parent Role is not found");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         return mapper.toDto(repository.save(mapper.toEntity(permission)));
     }
     
