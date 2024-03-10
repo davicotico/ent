@@ -83,7 +83,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                      when (select COUNT(*) from ent."user" as u where (u.username = :username and u.id <> :userId)) > 0 
                      then true 
                      else false
-                   end  as resultado
+                   end as resultado
                    """, nativeQuery = true)
     boolean existsByUsername(
             @Param("username") String username,

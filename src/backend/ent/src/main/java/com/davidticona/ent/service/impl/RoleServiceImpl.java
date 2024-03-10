@@ -20,7 +20,6 @@ import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 
 /**
  *
@@ -76,7 +75,14 @@ public class RoleServiceImpl implements RoleService {
     public RoleResponseDto update(Integer id, RoleUpdateRequestDto roleDto) {
         validator.<RoleUpdateRequestDto>validate(roleDto);
         Role role = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(() -> new EntityNotFoundException("Role does not exists"));
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByCodeAndApplicationId(roleDto.code(), role.getApplicationId(), role.getId())) {
+            errors.add("Code already exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
         role.setCode(roleDto.code());
         role.setName(roleDto.name());
         return roleMapper.toDto(repository.save(role));

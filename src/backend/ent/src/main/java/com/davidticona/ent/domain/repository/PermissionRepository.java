@@ -35,4 +35,6 @@ public interface PermissionRepository extends JpaRepository<Permission, Integer>
     Integer countChildren(@Param("permissionId") Integer id);
     
     Optional<Permission> findByIdAndApplicationId(Integer id, Integer applicationId);
+    
+    boolean existsByCodeAndApplicationId(String code, Integer applicationId);
 }

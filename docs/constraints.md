@@ -34,7 +34,7 @@
 
 ## Permission
 
-- [ ] Code unique
+- [x] Code unique
 
 ### Create
 
@@ -42,7 +42,7 @@
 - [x] Parent id is valid if exists in Application
 
 ### Update
-- [x] Code unique
+- [ ] Code unique
 
 ### Delete
 - [x] Check if has children

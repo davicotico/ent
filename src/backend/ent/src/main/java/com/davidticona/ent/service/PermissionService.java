@@ -25,5 +25,4 @@ public interface PermissionService {
     boolean hasChildren(Integer id);
     
     boolean permissionExists(Integer id);
-    boolean permissionExists(List<Integer> ids);
 }

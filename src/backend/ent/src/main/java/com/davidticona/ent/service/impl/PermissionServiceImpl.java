@@ -46,6 +46,9 @@ public class PermissionServiceImpl implements PermissionService{
                 .isPresent()) {
             throw new EntityNotFoundException("Parent Role is not found");
         }
+        if (repository.existsByCodeAndApplicationId(permission.code(), permission.applicationId())) {
+            errors.add("Code already exists");
+        }
         if (!errors.isEmpty()) {
             throw new ConflictException(errors);
         }
@@ -101,11 +104,6 @@ public class PermissionServiceImpl implements PermissionService{
     public boolean permissionExists(Integer id) {
         return repository.existsById(id);
     }
-
-    @Override
-    public boolean permissionExists(List<Integer> ids) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }    
 
     @Override
     public boolean hasRoles(Integer id) {

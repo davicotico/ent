@@ -81,12 +81,27 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                      when (select COUNT(*) from ent."role" as r where (r.code = :code and r.application_id = :applicationId)) > 0 
                      then true 
                      else false
-                   end as exists
+                   end as e
                    """, nativeQuery = true)
     boolean existsByCodeAndApplicationId(
             @Param("code") String code,
             @Param("applicationId") Integer applicationId
     );
+    
+    @Query(value = """
+                   select
+                   case
+                   when (select COUNT(*)
+                   from ent."role" as r
+                   where (r.code = :code and r.id <> :id and r.application_id = :applicationId)) > 0 
+                   then true
+                   else false
+                   end as e
+                   """, nativeQuery = true)
+    boolean existsByCodeAndApplicationId(
+            @Param("code") String code, 
+            @Param("applicationId") Integer applicationId, 
+            @Param("id") Integer ignoredId);
     
     Optional<Role> findByIdAndApplicationId(Integer id, Integer applicationId);
     
@@ -100,4 +115,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
                    where r.parent_id is null and application_id = :applicationId
                    """, nativeQuery = true)
     boolean existsRootByApplicationId(@Param("applicationId") Integer applicationId);
+    
+    
 }
