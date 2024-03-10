@@ -19,6 +19,7 @@ import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import com.davidticona.ent.validator.RoleValidator;
 import jakarta.persistence.EntityNotFoundException;
 
 /**
@@ -37,38 +38,26 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
     
+    @Autowired
+    private RoleValidator roleValidator;
+    
     private final ObjectValidator validator;
 
     public RoleServiceImpl(ObjectValidator validator) {
         this.validator = validator;
     }
-    
+
+    @Override
+    public RoleResponseDto createRoot(Integer applicationId) {
+        roleValidator.validateOnCreateRoot(applicationId);
+        return roleMapper.toDto(repository.save(EntityFactory.rootRole(applicationId)));
+    }
+
     @Override
     public RoleResponseDto create(RoleRequestDto role) {
         validator.validate(role);
-        List<String> errors = new LinkedList<>();
-        if (repository.existsByCodeAndApplicationId(role.code(), role.applicationId())) {
-            errors.add("Code exists");
-        }
-        if (!repository.findByIdAndApplicationId(role.parentId(), role.applicationId()).isPresent()) {
-            errors.add("parent id does not exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        roleValidator.validateBeforeCreate(role);
         return roleMapper.toDto(this.repository.save(roleMapper.toEntity(role)));
-    }
-    
-    @Override
-    public RoleResponseDto createRoot(Integer applicationId) {
-        List<String> errors = new LinkedList<>();
-        if (repository.existsRootByApplicationId(applicationId)) {
-            errors.add("This application has a root");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
-        return roleMapper.toDto(repository.save(EntityFactory.rootRole(applicationId)));
     }
     
     @Override
@@ -76,21 +65,18 @@ public class RoleServiceImpl implements RoleService {
         validator.<RoleUpdateRequestDto>validate(roleDto);
         Role role = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Role does not exists"));
-        List<String> errors = new LinkedList<>();
-        if (repository.existsByCodeAndApplicationId(roleDto.code(), role.getApplicationId(), role.getId())) {
-            errors.add("Code already exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        roleValidator.validateBeforeUpdate(role, roleDto);
         role.setCode(roleDto.code());
         role.setName(roleDto.name());
         return roleMapper.toDto(repository.save(role));
     }
-
+    
     @Override
-    public List<Role> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void delete(Integer id) {
+        Role role = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException());
+        roleValidator.validateBeforeDelete(id);
+        repository.delete(role);
     }
 
     @Override
@@ -103,26 +89,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<TreeNode> getAllTreeView(Integer applicationId) {
         return new Tree(this.getAll(applicationId)).getTree();
-    }
-
-    @Override
-    public void delete(Integer id) {
-        Role role = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
-        List<String> errors = new LinkedList<>();
-        if (hasUsers(id)) {
-            errors.add("Unable to delete record as it has associated users");
-        }
-        if (hasPermissions(id)) {
-            errors.add("Unable to delete record as it has associated permissions");
-        }
-        if (hasChildren(id)) {
-            errors.add("Unable to delete record as it has associated roles");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
-        repository.delete(role);
     }
 
     @Override

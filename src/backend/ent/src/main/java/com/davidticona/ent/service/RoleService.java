@@ -19,7 +19,6 @@ public interface RoleService {
     
     RoleResponseDto createRoot(Integer applicationId);
     
-    List<Role> getAll();
     List<AdjacentItem> getAll(Integer applicationId);
     List<TreeNode> getAllTreeView(Integer applicationId);
     
