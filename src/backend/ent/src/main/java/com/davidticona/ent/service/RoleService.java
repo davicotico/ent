@@ -5,7 +5,6 @@ import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.domain.dto.role.RoleUpdateRequestDto;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
-import com.davidticona.ent.domain.entity.Role;
 import java.util.List;
 
 /**

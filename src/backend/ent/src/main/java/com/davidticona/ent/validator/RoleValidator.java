@@ -20,7 +20,7 @@ public class RoleValidator {
     @Autowired
     private RoleRepository repository;
     
-    public  void validateBeforeCreate(RoleRequestDto role) {
+    public void validateBeforeCreate(RoleRequestDto role) {
         List<String> errors = new LinkedList<>();
         if (repository.existsByCodeAndApplicationId(role.code(), role.applicationId())) {
             errors.add("Code exists");
@@ -57,9 +57,9 @@ public class RoleValidator {
         if (!errors.isEmpty()) {
             throw new ConflictException(errors);
         }
-    }
+        }
     
-    public void validateOnCreateRoot(Integer applicationId) {
+    public void validateBeforeCreateRoot(Integer applicationId) {
         List<String> errors = new LinkedList<>();
         if (repository.existsRootByApplicationId(applicationId)) {
             errors.add("This application has a root");

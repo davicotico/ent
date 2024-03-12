@@ -49,7 +49,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleResponseDto createRoot(Integer applicationId) {
-        roleValidator.validateOnCreateRoot(applicationId);
+        roleValidator.validateBeforeCreateRoot(applicationId);
         return roleMapper.toDto(repository.save(EntityFactory.rootRole(applicationId)));
     }
 

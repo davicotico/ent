@@ -9,6 +9,7 @@ import com.davidticona.ent.service.AppService;
 import com.davidticona.ent.service.PermissionService;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.mapper.AppMapper;
+import com.davidticona.ent.validator.AppValidator;
 import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -36,6 +37,9 @@ public class AppServiceImpl implements AppService{
     @Autowired
     private PermissionService permissionService;
     
+    @Autowired
+    private AppValidator appValidator;
+    
     private final ObjectValidator validator;
 
     public AppServiceImpl(ObjectValidator validator) {
@@ -51,13 +55,7 @@ public class AppServiceImpl implements AppService{
     @Transactional
     public AppResponseDto create(AppRequestDto appDto) {
         validator.validate(appDto);
-        List<String> errors = new LinkedList<>();
-        if (repository.existsByCode(appDto.code())) {
-            errors.add("Code already exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        appValidator.validateBeforeCreate(appDto);
         AppEntity newApp = repository.save(mapper.toEntity(appDto));
         roleService.createRoot(newApp.getId());
         permissionService.createRoot(newApp.getId());
@@ -80,19 +78,7 @@ public class AppServiceImpl implements AppService{
     public void delete(Integer id) {
         AppEntity app = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
-        List<String> errors = new LinkedList<>();
-        if (hasUsers(id)) {
-            errors.add("Unable to delete record as it has associated users");
-        }
-        if (hasRoles(id)) {
-            errors.add("Unable to delete record as it has associated roles");
-        }
-        if (hasPermissions(id)) {
-            errors.add("Unable to delete record as it has associated permissions");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        appValidator.validateBeforeDelete(id);
         repository.delete(app);
     }
 
