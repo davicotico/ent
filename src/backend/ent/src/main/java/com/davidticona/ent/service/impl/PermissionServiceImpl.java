@@ -13,9 +13,9 @@ import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
 import com.davidticona.ent.util.mapper.PermissionMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import com.davidticona.ent.validator.PermissionValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +32,9 @@ public class PermissionServiceImpl implements PermissionService{
     @Autowired
     private PermissionMapper mapper;
     
+    @Autowired
+    private PermissionValidator permissionValidator;
+    
     private final ObjectValidator validator;
 
     public PermissionServiceImpl(ObjectValidator validator) {
@@ -41,17 +44,7 @@ public class PermissionServiceImpl implements PermissionService{
     @Override
     public PermissionResponseDto create(PermissionRequestDto permission) {
         validator.validate(permission);
-        List<String> errors = new LinkedList<>();
-        if (!repository.findByIdAndApplicationId(permission.parentId(), permission.applicationId())
-                .isPresent()) {
-            throw new EntityNotFoundException("Parent Role is not found");
-        }
-        if (repository.existsByCodeAndApplicationId(permission.code(), permission.applicationId())) {
-            errors.add("Code already exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        permissionValidator.validateBeforeCreate(permission);
         return mapper.toDto(repository.save(mapper.toEntity(permission)));
     }
     
@@ -72,20 +65,10 @@ public class PermissionServiceImpl implements PermissionService{
     }
     
     @Override
-    @Transactional
     public void delete(Integer id) {
         Permission permission = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
-        List<String> errors = new LinkedList<>();
-        if (hasRoles(id)) {
-            errors.add("Unable to delete record as it has associated roles");
-        }
-        if (hasChildren(id)) {
-            errors.add("Unable to delete record as it has associated permissions");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        permissionValidator.validateBeforeDelete(id);
         repository.delete(permission);
     }
 

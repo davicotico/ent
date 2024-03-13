@@ -15,6 +15,7 @@ import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.util.mapper.UserMapper;
 import com.davidticona.ent.validator.ObjectValidator;
+import com.davidticona.ent.validator.UserValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.LinkedList;
@@ -40,40 +41,28 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleMapper roleMapper;
     
+    @Autowired
+    private UserValidator userValidator;
+    
     private final ObjectValidator validator;
     
     @Override
     public List<UserProjection> read(Integer applicationId) {
-        return this.repository.findAll(applicationId);
+        return repository.findAll(applicationId);
     }
     
     @Override
-    @Transactional
     public UserResponseDto create(UserRequestDto userDto) {
         validator.validate(userDto);
-        List<String> errors = new LinkedList<>();
-        if (repository.existsByUsername(userDto.username())) {
-            errors.add("Username exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        userValidator.validateBeforeCreate(userDto);
         User user = userMapper.toEntity(userDto);
         return userMapper.toDto(this.repository.save(user));
     }
     
     @Override
-    @Transactional
     public void update(Integer id, UserUpdateRequestDto userDto) {
         validator.<UserUpdateRequestDto>validate(userDto);
-        List<String> errors = new LinkedList<>();
-        if (repository.existsByUsername(userDto.username(), id)) {
-            errors.add("Username exists");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
-        
+        userValidator.validateBeforeUpdate(id, userDto);
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
         user.setUsername(userDto.username());
@@ -82,20 +71,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public void delete(Integer id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
-        List<String> errors = new LinkedList<>();
-        if (hasApplications(id)) {
-            errors.add("Unable to delete record as it has associated applications");
-        }
-        if (hasRoles(id)) {
-            errors.add("Unable to delete record as it has associated roles");
-        }
-        if (!errors.isEmpty()) {
-            throw new ConflictException(errors);
-        }
+        userValidator.validateBeforeDelete(id);
         repository.delete(user);
     }
 
