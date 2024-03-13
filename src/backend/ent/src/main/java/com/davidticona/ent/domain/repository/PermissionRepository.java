@@ -37,4 +37,18 @@ public interface PermissionRepository extends JpaRepository<Permission, Integer>
     Optional<Permission> findByIdAndApplicationId(Integer id, Integer applicationId);
     
     boolean existsByCodeAndApplicationId(String code, Integer applicationId);
+    
+    @Query(value = """
+                   select
+                   case
+                      when (select COUNT(*) from ent."permission" as p
+                      where (p.code = :code and p.application_id = :applicationId and p.id <> :id)) > 0 
+                      then true
+                      else false
+                   end as e
+                   """, nativeQuery = true)
+    boolean existsByCodeAndApplicationId(
+            @Param("code") String code, 
+            @Param("applicationId") Integer applicationId, 
+            @Param("id") Integer ignoredId);
 }

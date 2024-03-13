@@ -42,7 +42,7 @@
 - [x] Parent id is valid if exists in Application
 
 ### Update
-- [ ] Code unique
+- [x] Code unique
 
 ### Delete
 - [x] Check if has children

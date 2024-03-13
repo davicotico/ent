@@ -7,7 +7,6 @@ import com.davidticona.ent.domain.dto.permission.PermissionUpdateRequestDto;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.repository.PermissionRepository;
-import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.service.PermissionService;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
@@ -54,11 +53,11 @@ public class PermissionServiceImpl implements PermissionService{
     }
     
     @Override
-    @Transactional
     public PermissionResponseDto update(Integer id, PermissionUpdateRequestDto permissionDto) {
         validator.<PermissionUpdateRequestDto>validate(permissionDto);
         Permission permission = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+        permissionValidator.validateBeforeUpdate(permission, permissionDto);
         permission.setCode(permissionDto.code());
         permission.setName(permissionDto.name());
         return mapper.toDto(repository.save(permission));

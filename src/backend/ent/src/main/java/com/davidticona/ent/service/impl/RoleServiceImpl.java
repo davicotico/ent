@@ -16,7 +16,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
-import com.davidticona.ent.exceptions.ConflictException;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import com.davidticona.ent.validator.RoleValidator;

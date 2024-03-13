@@ -1,6 +1,8 @@
 package com.davidticona.ent.validator;
 
 import com.davidticona.ent.domain.dto.permission.PermissionRequestDto;
+import com.davidticona.ent.domain.dto.permission.PermissionUpdateRequestDto;
+import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.repository.PermissionRepository;
 import com.davidticona.ent.exceptions.ConflictException;
 import jakarta.persistence.EntityNotFoundException;
@@ -26,6 +28,19 @@ public class PermissionValidator {
             throw new EntityNotFoundException("Parent Role is not found");
         }
         if (repository.existsByCodeAndApplicationId(permission.code(), permission.applicationId())) {
+            errors.add("Code already exists");
+        }
+        if (!errors.isEmpty()) {
+            throw new ConflictException(errors);
+        }
+    }
+    
+    public void validateBeforeUpdate(Permission permission, PermissionUpdateRequestDto permissionDto) {
+        List<String> errors = new LinkedList<>();
+        if (repository.existsByCodeAndApplicationId(
+                permissionDto.code(), 
+                permission.getApplicationId(), 
+                permission.getId())) {
             errors.add("Code already exists");
         }
         if (!errors.isEmpty()) {
