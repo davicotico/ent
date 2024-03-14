@@ -25,10 +25,10 @@ public class PermissionValidator {
         List<String> errors = new LinkedList<>();
         if (!repository.findByIdAndApplicationId(permission.parentId(), permission.applicationId())
                 .isPresent()) {
-            throw new EntityNotFoundException("Parent Role is not found");
+            throw new EntityNotFoundException("Parent role does not exist");
         }
         if (repository.existsByCodeAndApplicationId(permission.code(), permission.applicationId())) {
-            errors.add("Code already exists");
+            errors.add("Code must be unique and conflicts with an existing value");
         }
         if (!errors.isEmpty()) {
             throw new ConflictException(errors);

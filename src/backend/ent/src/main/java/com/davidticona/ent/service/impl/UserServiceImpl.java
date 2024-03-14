@@ -139,12 +139,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean hasApplications(Integer userId) {
-        return (repository.hasApplications(userId) > 0);
+        return (repository.countApplications(userId) > 0);
     }
 
     @Override
     public boolean hasRoles(Integer userId) {
-        return (repository.hasRoles(userId) > 0);
+        return (repository.countRoles(userId) > 0);
     }
     
 }

@@ -58,14 +58,14 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                    from ent.application_user au
                    where au.user_id= :userId
                    """, nativeQuery = true)
-    Integer hasApplications(Integer userId);
+    Integer countApplications(Integer userId);
     
     @Query(value = """
                    select count(*) as c
                    from ent.user_role as ur
                    where ur.user_id = :userId
                    """, nativeQuery = true)
-    Integer hasRoles(Integer userId);
+    Integer countRoles(Integer userId);
     
     @Query(value = """
                    select 

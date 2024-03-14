@@ -41,10 +41,10 @@ public class UserValidator {
     
     public void validateBeforeDelete(Integer id) {
         List<String> errors = new LinkedList<>();
-        if (repository.hasApplications(id) > 0) {
+        if (repository.countApplications(id) > 0) {
             errors.add("Unable to delete record as it has associated applications");
         }
-        if (repository.hasRoles(id) > 0) {
+        if (repository.countRoles(id) > 0) {
             errors.add("Unable to delete record as it has associated roles");
         }
         if (!errors.isEmpty()) {

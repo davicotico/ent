@@ -1,5 +1,5 @@
 
-package com.davidticona.ent.domain;
+package com.davidticona.ent.domain.entity;
 
 import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.domain.entity.Role;

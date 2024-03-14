@@ -1,6 +1,5 @@
 package com.davidticona.ent.exceptions;
 
-import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

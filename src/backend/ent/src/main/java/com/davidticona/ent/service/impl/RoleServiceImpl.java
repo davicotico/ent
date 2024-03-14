@@ -1,6 +1,6 @@
 package com.davidticona.ent.service.impl;
 
-import com.davidticona.ent.domain.EntityFactory;
+import com.davidticona.ent.domain.entity.EntityFactory;
 import com.davidticona.ent.domain.dto.role.RoleRequestDto;
 import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.domain.dto.role.RoleUpdateRequestDto;
