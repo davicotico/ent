@@ -31,6 +31,6 @@ public interface RoleService {
     List<AdjacentItem> getPermissions(Integer applicationId, Integer roleId);
     List<TreeNode> getPermissionsTrees(Integer applicationId, Integer roleId);
     
-    void addPermission(Integer permissionId);
-    void removePermission(Integer permissionId);
+    void addPermission(Integer applicationId, Integer roleId, Integer permissionId);
+    void removePermission(Integer applicationId, Integer roleId, Integer permissionId);
 }

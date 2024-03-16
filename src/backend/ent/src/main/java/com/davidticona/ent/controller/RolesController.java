@@ -71,6 +71,24 @@ public class RolesController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping("/{id}/permission/{permissionId}")
+    public ResponseEntity addPermission(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @PathVariable Integer id, 
+            @PathVariable Integer permissionId) {
+        service.addPermission(applicationId, id, permissionId);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @DeleteMapping("/{id}/permission/{permissionId}")
+    public ResponseEntity removePermission(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @PathVariable Integer id,
+            @PathVariable Integer permissionId) {
+        service.removePermission(applicationId, id, permissionId);
+        return ResponseEntity.noContent().build();
+    }
 }
 
 /*List<AdjacentItem> lista = new LinkedList<>();

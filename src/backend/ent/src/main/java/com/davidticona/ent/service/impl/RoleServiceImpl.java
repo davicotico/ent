@@ -4,9 +4,12 @@ import com.davidticona.ent.domain.entity.EntityFactory;
 import com.davidticona.ent.domain.dto.role.RoleRequestDto;
 import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.domain.dto.role.RoleUpdateRequestDto;
+import com.davidticona.ent.domain.entity.Permission;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.TreeNode;
 import com.davidticona.ent.domain.entity.Role;
+import com.davidticona.ent.domain.entity.RolePermission;
+import com.davidticona.ent.domain.entity.RolePermissionId;
 import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.service.RoleService;
 import com.davidticona.ent.util.Tree.Tree;
@@ -16,6 +19,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
+import com.davidticona.ent.domain.repository.PermissionRepository;
+import com.davidticona.ent.domain.repository.RolePermissionRepository;
 import com.davidticona.ent.util.mapper.RoleMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import com.davidticona.ent.validator.RoleValidator;
@@ -30,6 +35,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleRepository repository;
+    
+    @Autowired
+    private RolePermissionRepository rolePermissionRepository;
+    
+    @Autowired
+    private PermissionRepository permissionRepository;
     
     @Autowired
     private PermissionMapper permissionMapper;
@@ -101,13 +112,29 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void addPermission(Integer permissionId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addPermission(Integer applicationId, Integer roleId, Integer permissionId) {
+        Role role = repository
+                .findByIdAndApplicationId(roleId, applicationId)
+                .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
+        Permission permission = permissionRepository
+                .findByIdAndApplicationId(applicationId, permissionId)
+                .orElseThrow(() -> new EntityNotFoundException("Permission was not found"));
+        RolePermissionId id = new RolePermissionId(roleId, permissionId);
+        RolePermission rolePermission = new RolePermission();
+        rolePermission.setId(id);
+        rolePermission.setRole(role);
+        rolePermission.setPermission(permission);
+        rolePermissionRepository.save(rolePermission);
     }
 
     @Override
-    public void removePermission(Integer permissionId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void removePermission(Integer applicationId, Integer roleId, Integer permissionId) {
+        repository.findByIdAndApplicationId(roleId, applicationId)
+                .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
+        permissionRepository.findByIdAndApplicationId(permissionId, applicationId)
+                .orElseThrow(() -> new EntityNotFoundException("Permission was not found"));
+        RolePermissionId id = new RolePermissionId(roleId, permissionId);
+        rolePermissionRepository.deleteById(id);
     }
 
     @Override
