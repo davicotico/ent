@@ -27,6 +27,9 @@ public class User {
     Integer id;
     
     @OneToMany(mappedBy = "user")
+    Set<AppUser> applicationsUsers = new HashSet<>();
+    
+    @OneToMany(mappedBy = "user")
     Set<UserRole> usersRoles = new HashSet<>();
     
     @Column

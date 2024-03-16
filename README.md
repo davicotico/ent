@@ -28,8 +28,8 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 - [x] Create application
 - [x] Update application
 - [x] Delete application
-- [ ] Add user
-- [ ] Remove user
+- [x] Add user
+- [x] Remove user
 
 #### Users
 

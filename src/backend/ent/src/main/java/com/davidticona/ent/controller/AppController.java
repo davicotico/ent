@@ -52,4 +52,20 @@ public class AppController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @PutMapping("/{id}/users/{userId}")
+    public ResponseEntity addUser(
+            @PathVariable Integer id,
+            @PathVariable Integer userId) {
+        service.addUser(id, userId);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @DeleteMapping("/{id}/users/{userId}")
+    public ResponseEntity removeUser(
+            @PathVariable Integer id,
+            @PathVariable Integer userId) {
+        service.removeUser(id, userId);
+        return ResponseEntity.noContent().build();
+    }
 }

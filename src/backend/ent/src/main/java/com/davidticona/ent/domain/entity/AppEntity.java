@@ -5,9 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -34,6 +37,9 @@ public class AppEntity {
     
     @Column
     String url;
+    
+    @OneToMany(mappedBy = "application")
+    Set<AppUser> applicationsUsers = new HashSet<>();
     
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

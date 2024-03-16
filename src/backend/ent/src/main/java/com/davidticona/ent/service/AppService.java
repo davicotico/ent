@@ -14,6 +14,9 @@ public interface AppService {
     AppResponseDto update(Integer id, AppRequestDto app);
     void delete(Integer id);
     
+    void addUser(Integer id, Integer userId);
+    void removeUser(Integer id, Integer userId);
+    
     boolean hasUsers(Integer applicationId);
     boolean hasRoles(Integer applicationId);
     boolean hasPermissions(Integer applicationId);
