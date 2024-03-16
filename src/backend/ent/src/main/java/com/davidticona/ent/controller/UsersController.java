@@ -71,4 +71,13 @@ public class UsersController {
         }
         return ResponseEntity.ok(this.userService.getRoles(applicationId, userId));
     }
+    
+    @PutMapping("/{id}/roles/{roleId}")
+    public ResponseEntity addRole(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @PathVariable("id") Integer userId,
+            @PathVariable("roleId") Integer roleId) {
+        userService.addRole(applicationId, userId, roleId);
+        return ResponseEntity.noContent().build();
+    }
 }

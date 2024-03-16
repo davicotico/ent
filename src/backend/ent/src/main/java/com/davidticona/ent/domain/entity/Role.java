@@ -39,6 +39,9 @@ public class Role {
     String name;
     
     @OneToMany(mappedBy = "role")
+    Set<UserRole> usersRoles = new HashSet<>();
+    
+    @OneToMany(mappedBy = "role")
     Set<RolePermission> rolesPermissions = new HashSet<>();
     
     @CreationTimestamp

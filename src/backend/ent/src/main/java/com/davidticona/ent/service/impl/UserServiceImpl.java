@@ -3,11 +3,15 @@ package com.davidticona.ent.service.impl;
 import com.davidticona.ent.domain.dto.user.UserRequestDto;
 import com.davidticona.ent.domain.dto.user.UserResponseDto;
 import com.davidticona.ent.domain.dto.user.UserUpdateRequestDto;
+import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.entity.User;
+import com.davidticona.ent.domain.entity.UserRole;
+import com.davidticona.ent.domain.entity.UserRoleId;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
+import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.domain.repository.UserRepository;
-import com.davidticona.ent.exceptions.ConflictException;
+import com.davidticona.ent.domain.repository.UserRoleRepository;
 import com.davidticona.ent.service.UserService;
 import com.davidticona.ent.util.Tree.AdjacentItem;
 import com.davidticona.ent.util.Tree.Tree;
@@ -17,7 +21,6 @@ import com.davidticona.ent.util.mapper.UserMapper;
 import com.davidticona.ent.validator.ObjectValidator;
 import com.davidticona.ent.validator.UserValidator;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,12 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserRepository repository;
+    
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+    
+    @Autowired
+    private RoleRepository roleRepository;
     
     @Autowired
     private UserMapper userMapper;
@@ -99,8 +108,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRole(Integer roleId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addRole(Integer applicationId, Integer userId, Integer roleId) {
+        User user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User was not found"));
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
+        UserRoleId id = new UserRoleId(userId, roleId);
+        UserRole userRole = new UserRole();
+        userRole.setId(id);
+        userRole.setUser(user);
+        userRole.setRole(role);
+        userRoleRepository.save(userRole);
     }
 
     @Override
@@ -109,7 +127,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeRole(Integer roleId) {
+    public void removeRole(Integer applicationId, Integer userId, Integer roleId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -4,16 +4,27 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
-import lombok.Data;
 
 /**
  *
  * @author David Tomas Ticona Saravia
  */
 @Embeddable
-
 public class RolePermissionId implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
+    @Column(name = "role_id")
+    private Integer roleId;
+    
+    @Column(name = "permission_id")
+    private Integer permissionId;
+
+    public RolePermissionId(Integer roleId, Integer permissionId) {
+        this.roleId = roleId;
+        this.permissionId = permissionId;
+    }
+    
     public RolePermissionId() {
     }
 
@@ -58,19 +69,4 @@ public class RolePermissionId implements Serializable{
     public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Column(name = "role_id")
-    private Integer roleId;
-    
-    @Column(name = "permission_id")
-    private Integer permissionId;
-
-    public RolePermissionId(Integer roleId, Integer permissionId) {
-        this.roleId = roleId;
-        this.permissionId = permissionId;
-    }
-    
-    
 }

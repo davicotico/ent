@@ -72,7 +72,7 @@ public class RolesController {
         return ResponseEntity.noContent().build();
     }
     
-    @PutMapping("/{id}/permission/{permissionId}")
+    @PutMapping("/{id}/permissions/{permissionId}")
     public ResponseEntity addPermission(
             @RequestHeader(name = "Application-Id") Integer applicationId,
             @PathVariable Integer id, 
@@ -81,7 +81,7 @@ public class RolesController {
         return ResponseEntity.noContent().build();
     }
     
-    @DeleteMapping("/{id}/permission/{permissionId}")
+    @DeleteMapping("/{id}/permissions/{permissionId}")
     public ResponseEntity removePermission(
             @RequestHeader(name = "Application-Id") Integer applicationId,
             @PathVariable Integer id,

@@ -1,6 +1,5 @@
 package com.davidticona.ent.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -19,19 +18,19 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Getter
 @Setter
-@Table(name="role_permission", schema = "ent")
-public class RolePermission {
+@Table(name = "user_role", schema = "ent")
+public class UserRole {
     
     @EmbeddedId
-    private RolePermissionId id;
+    UserRoleId id;
+    
+    @ManyToOne
+    @MapsId("userId")
+    User user;
     
     @ManyToOne
     @MapsId("roleId")
-    private Role role;
-    
-    @ManyToOne
-    @MapsId("permissionId")
-    private Permission permission;
+    Role role;
     
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
