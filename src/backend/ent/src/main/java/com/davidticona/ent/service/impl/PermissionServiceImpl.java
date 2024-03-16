@@ -49,7 +49,7 @@ public class PermissionServiceImpl implements PermissionService{
     
     @Override
     public PermissionResponseDto createRoot(Integer applicationId) {
-        return mapper.toDto(repository.save(EntityFactory.rootPermission(applicationId)));
+        return mapper.toDto(repository.save(EntityFactory.createFirstPermission(applicationId)));
     }
     
     @Override

@@ -32,8 +32,6 @@ public interface UserService {
     boolean hasRoles(Integer userId);
     
     void addRole(Integer applicationId, Integer userId, Integer roleId);
-    void addRole(List<Integer> roleIds);
     void removeRole(Integer applicationId, Integer userId, Integer roleId);
-    void removeRole(List<Integer> roleIds);
     
 }

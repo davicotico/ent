@@ -9,7 +9,7 @@ import com.davidticona.ent.domain.entity.Role;
  * @author David Tomas Ticona Saravia
  */
 public class EntityFactory {
-    public static Role rootRole(Integer applicationId) {
+    public static Role createFirstRole(Integer applicationId) {
         Role newRole = new Role();
         newRole.setApplicationId(applicationId);
         newRole.setParentId(null);
@@ -17,7 +17,7 @@ public class EntityFactory {
         newRole.setName("root");
         return newRole;
     }
-    public static Permission rootPermission(Integer applicationId) {
+    public static Permission createFirstPermission(Integer applicationId) {
         Permission p = new Permission();
         p.setApplicationId(applicationId);
         p.setParentId(null);

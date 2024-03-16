@@ -2,6 +2,8 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.dto.app.AppRequestDto;
 import com.davidticona.ent.domain.dto.app.AppResponseDto;
+import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
+import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.domain.entity.AppEntity;
 import com.davidticona.ent.domain.entity.AppUser;
 import com.davidticona.ent.domain.entity.AppUserId;
@@ -66,8 +68,13 @@ public class AppServiceImpl implements AppService{
         validator.validate(appDto);
         appValidator.validateBeforeCreate(appDto);
         AppEntity newApp = repository.save(mapper.toEntity(appDto));
-        roleService.createRoot(newApp.getId());
-        permissionService.createRoot(newApp.getId());
+        Integer roleId = roleService
+                .createRoot(newApp.getId())
+                .id();
+        Integer permissionId = permissionService
+                .createRoot(newApp.getId())
+                .id();
+        System.out.println("roleId: " + roleId + ", permissionId: " + permissionId);
         return mapper.toDto(newApp);
     }
 

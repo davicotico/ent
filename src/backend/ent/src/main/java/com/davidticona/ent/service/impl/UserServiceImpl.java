@@ -3,12 +3,14 @@ package com.davidticona.ent.service.impl;
 import com.davidticona.ent.domain.dto.user.UserRequestDto;
 import com.davidticona.ent.domain.dto.user.UserResponseDto;
 import com.davidticona.ent.domain.dto.user.UserUpdateRequestDto;
+import com.davidticona.ent.domain.entity.AppUserId;
 import com.davidticona.ent.domain.entity.Role;
 import com.davidticona.ent.domain.entity.User;
 import com.davidticona.ent.domain.entity.UserRole;
 import com.davidticona.ent.domain.entity.UserRoleId;
 import com.davidticona.ent.domain.projection.AdjacentItemProjection;
 import com.davidticona.ent.domain.projection.UserProjection;
+import com.davidticona.ent.domain.repository.AppUserRepository;
 import com.davidticona.ent.domain.repository.RoleRepository;
 import com.davidticona.ent.domain.repository.UserRepository;
 import com.davidticona.ent.domain.repository.UserRoleRepository;
@@ -109,6 +111,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addRole(Integer applicationId, Integer userId, Integer roleId) {
+        userValidator.beforeAddRole(applicationId, userId);
         User user = repository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User was not found"));
         Role role = roleRepository.findByIdAndApplicationId(roleId, applicationId)
@@ -122,11 +125,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRole(List<Integer> roleIds) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void removeRole(Integer applicationId, Integer userId, Integer roleId) {
         repository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User was not found"));
@@ -134,11 +132,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
         UserRoleId id = new UserRoleId(userId, roleId);
         userRoleRepository.deleteById(id);
-    }
-
-    @Override
-    public void removeRole(List<Integer> roleIds) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
