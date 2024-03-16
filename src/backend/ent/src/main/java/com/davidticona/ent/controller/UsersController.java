@@ -80,4 +80,13 @@ public class UsersController {
         userService.addRole(applicationId, userId, roleId);
         return ResponseEntity.noContent().build();
     }
+    
+    @DeleteMapping("/{id}/roles/{roleId}")
+    public ResponseEntity removeRole(
+            @RequestHeader(name = "Application-Id") Integer applicationId,
+            @PathVariable("id") Integer userId,
+            @PathVariable("roleId") Integer roleId) {
+        userService.removeRole(applicationId, userId, roleId);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
     public void addRole(Integer applicationId, Integer userId, Integer roleId) {
         User user = repository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User was not found"));
-        Role role = roleRepository.findById(roleId)
+        Role role = roleRepository.findByIdAndApplicationId(roleId, applicationId)
                 .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
         UserRoleId id = new UserRoleId(userId, roleId);
         UserRole userRole = new UserRole();
@@ -128,7 +128,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeRole(Integer applicationId, Integer userId, Integer roleId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User was not found"));
+        roleRepository.findByIdAndApplicationId(roleId, applicationId)
+                .orElseThrow(() -> new EntityNotFoundException("Role was not found"));
+        UserRoleId id = new UserRoleId(userId, roleId);
+        userRoleRepository.deleteById(id);
     }
 
     @Override

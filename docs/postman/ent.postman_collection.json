@@ -262,6 +262,66 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add Role",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/11/roles/166",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"11",
+								"roles",
+								"166"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Role",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/11/roles/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"11",
+								"roles",
+								"16"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -380,7 +440,8 @@
 							{
 								"key": "Application-Id",
 								"value": "1",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -410,6 +471,34 @@
 					"response": []
 				},
 				{
+					"name": "DeleteRole",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Application-Id",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/roles/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"roles",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "addPermission",
 					"request": {
 						"method": "PUT",
@@ -430,7 +519,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/roles/17/permission/15",
+							"raw": "http://localhost:8080/api/v1/roles/17/permission/11a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -442,7 +531,7 @@
 								"roles",
 								"17",
 								"permission",
-								"15"
+								"11a"
 							]
 						}
 					},
@@ -482,34 +571,6 @@
 								"4",
 								"permission",
 								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteRole",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Application-Id",
-								"value": "1",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/roles/14",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"roles",
-								"14"
 							]
 						}
 					},

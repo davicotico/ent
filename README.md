@@ -40,7 +40,7 @@ Open in Postman `docs\postman\ent.postman_collection.json`
 - [x] Update user
 - [x] Delete user
 - [x] Add role
-- [ ] Remove role
+- [x] Remove role
 
 #### Roles
 
