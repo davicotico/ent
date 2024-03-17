@@ -1,8 +1,9 @@
 import { api } from 'src/boot/axios';
+import { ApplicationResponseModel } from 'src/models/application.model';
 
 class ApplicationService {
-  getApplications() {
-    return api.get('/applications');
+  async getApplications() {
+    return await api.get<ApplicationResponseModel[]>('/applications');
   }
 }
 

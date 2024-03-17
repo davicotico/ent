@@ -49,13 +49,13 @@ const linksList: EssentialLinkProps[] = [
     title: 'Home',
     caption: 'quasar.dev',
     icon: 'home',
-    link: 'https://quasar.dev',
+    link: '/',
   },
   {
     title: 'Applications',
     caption: 'github.com/quasarframework',
     icon: 'view_module',
-    link: 'https://github.com/quasarframework',
+    link: '/applications',
   },
   {
     title: 'Users',

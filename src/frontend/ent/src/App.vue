@@ -6,7 +6,7 @@
 import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
-$q.dark.set(false);
+$q.dark.set(true);
 
 defineOptions({
   name: 'App',
