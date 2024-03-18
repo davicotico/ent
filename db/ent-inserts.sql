@@ -1,6 +1,5 @@
-
 -- applications
-INSERT INTO ent.application (code, "name", description, url, created_at, updated_at, last_user) VALUES('ENT', 'ENT PLATFORM', 'Authentication & Authorization Application', 'http://localhost', '2024-02-21 21:25:52.031', NULL, 'superadmin');
+INSERT INTO ent.application (application_key, code, "name", description, "version", url, created_at, updated_at, last_user) VALUES(gen_random_uuid(), 'ENT', 'ENT PLATFORM', 'Authentication & Authorization Application', '1.0', 'http://localhost', now(), NULL, 'superadmin');
 
 -- users
 INSERT INTO ent."user" (username, password_salt, password_hash, email, is_valid_email, active, created_at, updated_at, last_user) VALUES('superadmin', '123', '123', 'support@davidticona.com', true, true, '2024-02-21 21:54:32.654', NULL, 'superadmin');

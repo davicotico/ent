@@ -2,8 +2,6 @@ package com.davidticona.ent.service.impl;
 
 import com.davidticona.ent.domain.dto.app.AppRequestDto;
 import com.davidticona.ent.domain.dto.app.AppResponseDto;
-import com.davidticona.ent.domain.dto.permission.PermissionResponseDto;
-import com.davidticona.ent.domain.dto.role.RoleResponseDto;
 import com.davidticona.ent.domain.entity.AppEntity;
 import com.davidticona.ent.domain.entity.AppUser;
 import com.davidticona.ent.domain.entity.AppUserId;
@@ -20,6 +18,7 @@ import com.davidticona.ent.validator.ObjectValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +66,10 @@ public class AppServiceImpl implements AppService{
     public AppResponseDto create(AppRequestDto appDto) {
         validator.validate(appDto);
         appValidator.validateBeforeCreate(appDto);
-        AppEntity newApp = repository.save(mapper.toEntity(appDto));
+        UUID applicationKey = UUID.randomUUID();
+        AppEntity app = mapper.toEntity(appDto);
+        app.setApplicationKey(applicationKey);
+        AppEntity newApp = repository.save(app);
         Integer roleId = roleService
                 .createRoot(newApp.getId())
                 .id();

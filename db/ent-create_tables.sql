@@ -28,15 +28,19 @@ CREATE TABLE ent.user (
 
 CREATE TABLE ent.application (
     id SERIAL  NOT NULL,
+    application_key UUID,
     code CHARACTER VARYING(20)  NOT NULL,
     name CHARACTER VARYING(250),
     description TEXT,
+    version CHARACTER VARYING(15),
     url CHARACTER VARYING(255),
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     last_user CHARACTER VARYING(50),
     CONSTRAINT PK_application PRIMARY KEY (id)
 );
+
+CREATE UNIQUE INDEX IDX_application_1 ON ent.application (application_key);
 
 /* ---------------------------------------------------------------------- */
 /* Add table "ent.menu"                                                   */

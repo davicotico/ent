@@ -11,12 +11,13 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
- * @author David Tomas Ticona
+ * @author David Tomas Ticona Saravia
  */
 @Data
 @Entity
@@ -25,6 +26,9 @@ public class AppEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    
+    @Column
+    UUID applicationKey;
 
     @Column
     String code;
@@ -37,6 +41,9 @@ public class AppEntity {
     
     @Column
     String url;
+    
+    @Column
+    String version;
     
     @OneToMany(mappedBy = "application")
     Set<AppUser> applicationsUsers = new HashSet<>();

@@ -21,7 +21,10 @@ public record AppRequestDto(
         String description,
         
         @Length(max = 250)
-        String url
+        String url,
+        
+        @Length(max = 15)
+        String version
         ) {
 
 }
