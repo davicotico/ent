@@ -35,11 +35,8 @@ public class User {
     @Column
     String username;
     
-    @Column
-    String passwordSalt;
-    
-    @Column
-    String passwordHash;
+    @Column(name = "password_salt")
+    String passw;
     
     @Column
     String email;

@@ -13,7 +13,8 @@
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <div>Quasar v{{ $q.version }}</div> -->
+        <UserMenu></UserMenu>
       </q-toolbar>
     </q-header>
 
@@ -39,6 +40,7 @@ import { ref } from 'vue';
 import EssentialLink, {
   EssentialLinkProps,
 } from 'components/EssentialLink.vue';
+import UserMenu from 'src/components/UserMenu.vue';
 
 defineOptions({
   name: 'MainLayout',

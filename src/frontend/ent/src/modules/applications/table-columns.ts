@@ -1,19 +1,5 @@
-<template>
-  <q-page padding>
-    <q-table
-      title="Applications"
-      :rows="items"
-      :columns="columns"
-      row-key="name"
-      :binary-state-sort="true"
-    />
-  </q-page>
-</template>
-<script setup lang="ts">
-import { QTableColumn } from 'quasar';
 import { ApplicationResponseModel } from 'src/models/application.model';
-import ApplicationsService from 'src/services/Applications.service';
-import { Ref, onMounted, ref } from 'vue';
+import { QTableColumn } from 'quasar';
 
 const columns: QTableColumn[] = [
   {
@@ -50,15 +36,4 @@ const columns: QTableColumn[] = [
   },
 ];
 
-const items: Ref<ApplicationResponseModel[]> = ref([]);
-
-onMounted(() => {
-  ApplicationsService.getApplications()
-    .then((result) => {
-      items.value = result.data;
-    })
-    .catch(() => {
-      alert('Error desconocido');
-    });
-});
-</script>
+export { columns };
